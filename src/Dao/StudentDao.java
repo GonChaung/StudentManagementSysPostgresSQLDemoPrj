@@ -1,9 +1,11 @@
 package Dao;
+
 import Model.Student;
 import Utils.DatabaseUtil;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 public class StudentDao {
     Connection con= DatabaseUtil.getConnection();
     public Student studentUpdate(Student student) {

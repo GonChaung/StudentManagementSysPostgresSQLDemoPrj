@@ -1,4 +1,5 @@
 package Service;
+
 import Dao.StudentDao;
 import Model.Student;
 import Utils.DataUtil;
@@ -6,13 +7,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.*;
 import java.util.List;
+
 public class StudentService {
-    BufferedReader br=DataUtil.br;
+    BufferedReader br = DataUtil.br;
     private StudentDao studentDao;
     public StudentService() {
      this.studentDao = new StudentDao();
     }
-    public  void searchStudent( ) throws SQLException, IOException {
+    public void searchStudent( ) throws IOException {
         Student student = new Student();
         System.out.println("Type student ID : ");
         student.setStudent_id(Integer.parseInt(br.readLine()));
@@ -25,7 +27,7 @@ public class StudentService {
             System.out.println("student Department : " + searchStudent.getStudent_department());
         }else System.out.println("There is no student with ID " + student.getStudent_id());
     }
-    public  void insertStudent() throws SQLException, IOException {
+    public void insertStudent() throws IOException {
         Student student = new Student();
         System.out.println("Name : " ) ;
         student.setStudent_name(br.readLine());
@@ -40,7 +42,7 @@ public class StudentService {
             System.out.println(" New Student Added Successfully");
         }
     }
-    public  void deleteStudent() throws SQLException, IOException {
+    public void deleteStudent() throws IOException {
         Student student = new Student();
         System.out.println(" Type your student id : ");
         student.setStudent_id(Integer.parseInt(br.readLine()));
@@ -49,13 +51,13 @@ public class StudentService {
             System.out.println(" Student " + student.getStudent_id() + " deleted successfully");
         }else System.out.println("There is no student with ID " + student.getStudent_id());
     }
-    public  void getAllStudents() throws SQLException, IOException {
+    public void getAllStudents() throws SQLException, IOException {
        List<Student> students = this.studentDao.getAllStudents();
        for(Student student : students){
            System.out.println(" student id "+ student.getStudent_id() +"name " + student.getStudent_name() + " phone " + student.getStudent_phone() + " department " + student.getStudent_department() + " email " + student.getStudent_email());
        }
     }
-    public  void updateStudent() throws SQLException, IOException {
+    public void updateStudent() throws IOException {
         Student student = new Student();
         System.out.println("Type student ID : ");
         student.setStudent_id(Integer.parseInt(br.readLine()));
