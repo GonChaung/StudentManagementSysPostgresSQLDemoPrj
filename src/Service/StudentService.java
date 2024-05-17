@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.*;
 import java.util.List;
-
 public class StudentService {
     BufferedReader br=DataUtil.br;
     private StudentDao studentDao;
@@ -57,20 +56,20 @@ public class StudentService {
        }
     }
     public  void updateStudent() throws SQLException, IOException {
-            Student student = new Student();
-            System.out.println("Type student ID : ");
-            student.setStudent_id(Integer.parseInt(br.readLine()));
-            System.out.println("Type student name : ");
-            student.setStudent_name( br.readLine());
-            System.out.println("Type student phone : ");
-            student.setStudent_phone( br.readLine());
-            System.out.println("Type student email : ");
-            student.setStudent_email(br.readLine());
-            System.out.println("Type student department : ");
-            student.setStudent_department(br.readLine());
-            Student updatedStudent=this.studentDao.studentUpdate(student);
-            if(updatedStudent!=null){
+        Student student = new Student();
+        System.out.println("Type student ID : ");
+        student.setStudent_id(Integer.parseInt(br.readLine()));
+        System.out.println("Type student name : ");
+        student.setStudent_name( br.readLine());
+        System.out.println("Type student phone : ");
+        student.setStudent_phone( br.readLine());
+        System.out.println("Type student email : ");
+        student.setStudent_email(br.readLine());
+        System.out.println("Type student department : ");
+        student.setStudent_department(br.readLine());
+        Student updatedStudent=this.studentDao.studentUpdate(student);
+        if(updatedStudent!=null){
                 System.out.println(" Student " + updatedStudent.getStudent_name() + '(' + updatedStudent.getStudent_id() + ')' + " updated successfully");
-            }
+        }
     }
 }

@@ -1,8 +1,4 @@
 package Model;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.sql.*;
-
 public class Student {
     public int student_id;
     public String student_name;
@@ -18,43 +14,33 @@ public class Student {
         this.student_department = student_department;
     }
     public Student(){}
-
     public int getStudent_id() {
         return student_id;
     }
-
     public void setStudent_id(int student_id) {
         this.student_id = student_id;
     }
-
     public String getStudent_name() {
         return student_name;
     }
-
     public void setStudent_name(String student_name) {
         this.student_name = student_name;
     }
-
     public String getStudent_email() {
         return student_email;
     }
-
     public void setStudent_email(String student_email) {
         this.student_email = student_email;
     }
-
     public String getStudent_phone() {
         return student_phone;
     }
-
     public void setStudent_phone(String student_phone) {
         this.student_phone = student_phone;
     }
-
     public String getStudent_department() {
         return student_department;
     }
-
     public void setStudent_department(String student_department) {
         this.student_department = student_department;
     }
