@@ -18,6 +18,7 @@ public class TeacherController {
         System.out.println("2. Update Teacher : ");
         System.out.println("3. Delete Teacher : ");
         System.out.println("4. Search Teacher : ");
+        System.out.println("5. GetAll Teacher : ");
         System.out.println();
         int choice = Integer.parseInt(br.readLine());
         switch (choice) {
@@ -28,6 +29,8 @@ public class TeacherController {
             case 3: this.teacherService.deleteTeacher();
             break;
             case 4: this.teacherService.searchTeacher();
+            break;
+            case 5: this.teacherService.getAllTeacher();
             break;
         }
     }

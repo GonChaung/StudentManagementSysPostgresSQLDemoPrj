@@ -40,11 +40,10 @@ public class StudentDao {
             throw new RuntimeException(e);
         }
     }
-    public Student searchStudent(Student student_id) {
-        Student student = new Student();
+    public Student searchStudent(Student student) {
         String searchSQL = "SELECT * FROM students WHERE student_id = ?";
         try(PreparedStatement pstmt = con.prepareStatement(searchSQL)){
-            pstmt.setInt(1, student_id.getStudent_id());
+            pstmt.setInt(1, student.getStudent_id());
             try(ResultSet rs = pstmt.executeQuery()){
                 if(rs.next()){
                     student.setStudent_id(rs.getInt("student_id"));
@@ -64,9 +63,8 @@ public class StudentDao {
             throw new RuntimeException(e);
         }
     }
-    public Student deleteStudent(Student student_id) {
+    public Student deleteStudent(Student student) {
         String deleteSQL = "DELETE FROM students WHERE name = ? AND student_id = ?";
-        Student student = new Student();
         try(PreparedStatement pstmt = con.prepareStatement(deleteSQL)){
             pstmt.setInt(2, student.getStudent_id());
             int rowsAffected = pstmt.executeUpdate();
@@ -81,8 +79,8 @@ public class StudentDao {
     public List<Student> getAllStudents() throws SQLException {
         List<Student> students = new ArrayList<>();
         String searchSQL = "SELECT * FROM students";
-        Statement pstmt = con.createStatement();
-        ResultSet rs = pstmt.executeQuery(searchSQL);
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(searchSQL);
         while(rs.next()){
             Student student = new Student();
             student.setStudent_id(rs.getInt("student_id"));

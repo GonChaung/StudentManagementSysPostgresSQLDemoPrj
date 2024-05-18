@@ -54,7 +54,11 @@ public class StudentService {
     public void getAllStudents() throws SQLException, IOException {
        List<Student> students = this.studentDao.getAllStudents();
        for(Student student : students){
-           System.out.println(" student id "+ student.getStudent_id() +"name " + student.getStudent_name() + " phone " + student.getStudent_phone() + " department " + student.getStudent_department() + " email " + student.getStudent_email());
+           System.out.println(" student id "+ student.getStudent_id() +
+                   "/ name " + student.getStudent_name() +
+                   "/ phone " + student.getStudent_phone() +
+                   "/ department " + student.getStudent_department() +
+                   "/ email " + student.getStudent_email());
        }
     }
     public void updateStudent() throws IOException {

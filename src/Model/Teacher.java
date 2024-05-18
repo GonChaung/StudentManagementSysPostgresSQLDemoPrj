@@ -5,7 +5,7 @@ public class Teacher {
     public String teacher_name;
     public String teacher_department;
     public String teacher_course;
-    public int teacher_salary;
+    public long teacher_salary;
     public String teacher_email;
 
     public Teacher() {
@@ -52,11 +52,11 @@ public class Teacher {
         this.teacher_course = teacher_course;
     }
 
-    public int getTeacher_salary() {
+    public long getTeacher_salary() {
         return teacher_salary;
     }
 
-    public void setTeacher_salary(int teacher_salary) {
+    public void setTeacher_salary(long teacher_salary) {
         this.teacher_salary = teacher_salary;
     }
 
