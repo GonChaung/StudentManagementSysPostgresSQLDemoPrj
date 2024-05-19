@@ -19,29 +19,29 @@ public class EmployeeService {
     public void searchEmployee() throws IOException {
         Employee employee = new Employee();
         System.out.println("Type employee ID : ");
-        employee.setEmployee_id(Integer.parseInt(br.readLine()));
+        employee.setId(Integer.parseInt(br.readLine()));
         Employee searchEmployee = this.employeeDao.searchEmployee(employee);
         if (searchEmployee != null) {
-            System.out.println("employee ID :" + searchEmployee.getEmployee_id());
-            System.out.println("employee Name :" + searchEmployee.getEmployee_name());
-            System.out.println("employee Phone :" + searchEmployee.getEmployee_phone());
-            System.out.println("employee Department : " + searchEmployee.getEmployee_department());
-            System.out.println("employee Salary : " + searchEmployee.getEmployee_salary());
+            System.out.println("employee ID :" + searchEmployee.getId());
+            System.out.println("employee Name :" + searchEmployee.getName());
+            System.out.println("employee Phone :" + searchEmployee.getPhone());
+            System.out.println("employee Department : " + searchEmployee.getDepartment());
+            System.out.println("employee Salary : " + searchEmployee.getSalary());
         } else {
-            System.out.println("There is no employee with ID " + employee.getEmployee_id());
+            System.out.println("There is no employee with ID " + employee.getId());
         }
     }
 
     public void insertEmployee() throws IOException {
         Employee employee = new Employee();
         System.out.println("Name : ");
-        employee.setEmployee_name(br.readLine());
+        employee.setName(br.readLine());
         System.out.println("Phone : ");
-        employee.setEmployee_phone(br.readLine());
+        employee.setPhone(br.readLine());
         System.out.println("Department : ");
-        employee.setEmployee_department(br.readLine());
+        employee.setDepartment(br.readLine());
         System.out.println("Salary : ");
-        employee.setEmployee_salary(Long.parseLong(br.readLine()));
+        employee.setSalary(Long.parseLong(br.readLine()));
         Employee insertedEmployee = this.employeeDao.insertEmployee(employee);
         if (insertedEmployee != null) {
             System.out.println("New Employee Added Successfully");
@@ -51,41 +51,41 @@ public class EmployeeService {
     public void deleteEmployee() throws IOException {
         Employee employee = new Employee();
         System.out.println("Type your employee id : ");
-        employee.setEmployee_id(Integer.parseInt(br.readLine()));
+        employee.setId(Integer.parseInt(br.readLine()));
         Employee deletedEmployee = this.employeeDao.deleteEmployee(employee);
         if (deletedEmployee != null) {
-            System.out.println("Employee " + employee.getEmployee_id() + " deleted successfully");
+            System.out.println("Employee " + employee.getId() + " deleted successfully");
         } else {
-            System.out.println("There is no employee with ID " + employee.getEmployee_id());
+            System.out.println("There is no employee with ID " + employee.getId());
         }
     }
 
     public void getAllEmployees() throws SQLException, IOException {
         List<Employee> employees = this.employeeDao.getAllEmployees();
         for (Employee employee : employees) {
-            System.out.println("employee id " + employee.getEmployee_id() +
-                    "/ name " + employee.getEmployee_name() +
-                    "/ phone " + employee.getEmployee_phone() +
-                    "/ department " + employee.getEmployee_department() +
-                    "/ salary " + employee.getEmployee_salary());
+            System.out.println("employee id " + employee.getId() +
+                    "/ name " + employee.getName() +
+                    "/ phone " + employee.getPhone() +
+                    "/ department " + employee.getDepartment() +
+                    "/ salary " + employee.getSalary());
         }
     }
 
     public void updateEmployee() throws IOException {
         Employee employee = new Employee();
         System.out.println("Type employee ID : ");
-        employee.setEmployee_id(Integer.parseInt(br.readLine()));
+        employee.setId(Integer.parseInt(br.readLine()));
         System.out.println("Type employee name : ");
-        employee.setEmployee_name(br.readLine());
+        employee.setName(br.readLine());
         System.out.println("Type employee phone : ");
-        employee.setEmployee_phone(br.readLine());
+        employee.setPhone(br.readLine());
         System.out.println("Type employee department : ");
-        employee.setEmployee_department(br.readLine());
+        employee.setDepartment(br.readLine());
         System.out.println("Type employee salary : ");
-        employee.setEmployee_salary(Long.parseLong(br.readLine()));
+        employee.setSalary(Long.parseLong(br.readLine()));
         Employee updatedEmployee = this.employeeDao.employeeUpdate(employee);
         if (updatedEmployee != null) {
-            System.out.println("Employee " + updatedEmployee.getEmployee_name() + '(' + updatedEmployee.getEmployee_id() + ')' + " updated successfully");
+            System.out.println("Employee " + updatedEmployee.getName() + '(' + updatedEmployee.getId() + ')' + " updated successfully");
         }
     }
 }

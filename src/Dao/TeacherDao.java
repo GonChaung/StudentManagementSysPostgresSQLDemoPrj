@@ -1,6 +1,5 @@
 package Dao;
 
-import Model.Student;
 import Model.Teacher;
 import Utils.DatabaseUtil;
 
@@ -14,11 +13,11 @@ public class TeacherDao {
     public Teacher insertTeacher(Teacher teacher) {
         String insertSQL = "INSERT INTO teachers (name,department,course,salary,email) VALUES(?,?,?,?,?)";
         try(PreparedStatement pstmt = con.prepareStatement(insertSQL)) {
-            pstmt.setString(1, teacher.getTeacher_name());
-            pstmt.setString(2, teacher.getTeacher_department());
-            pstmt.setString(3, teacher.getTeacher_course());
-            pstmt.setLong(4, teacher.getTeacher_salary());
-            pstmt.setString(5, teacher.getTeacher_email());
+            pstmt.setString(1, teacher.getName());
+            pstmt.setString(2, teacher.getDepartment());
+            pstmt.setString(3, teacher.getCourse());
+            pstmt.setLong(4, teacher.getSalary());
+            pstmt.setString(5, teacher.getEmail());
             int rowAffected = pstmt.executeUpdate();
             if (rowAffected > 0) {
                 return teacher;
@@ -28,14 +27,14 @@ public class TeacherDao {
         }
     }
     public Teacher updateTeacher(Teacher teacher) {
-        String updateSQL = "UPDATE teachers SET name = ?,department = ?,course = ?,salary = ?,email = ? WHERE teacher_id = ?";
+        String updateSQL = "UPDATE teachers SET name = ?,department = ?,course = ?,salary = ?,email = ? WHERE id = ?";
         try(PreparedStatement pstmt = con.prepareStatement(updateSQL)){
-            pstmt.setString(1, teacher.getTeacher_name());
-            pstmt.setString(2, teacher.getTeacher_department());
-            pstmt.setString(3, teacher.getTeacher_course());
-            pstmt.setLong(4, teacher.getTeacher_salary());
-            pstmt.setString(5, teacher.getTeacher_email());
-            pstmt.setInt(6, teacher.getTeacher_id());
+            pstmt.setString(1, teacher.getName());
+            pstmt.setString(2, teacher.getDepartment());
+            pstmt.setString(3, teacher.getCourse());
+            pstmt.setLong(4, teacher.getSalary());
+            pstmt.setString(5, teacher.getEmail());
+            pstmt.setInt(6, teacher.getId());
             int rowAffected = pstmt.executeUpdate();
             if (rowAffected > 0) {
                 return teacher;
@@ -45,9 +44,9 @@ public class TeacherDao {
         }
     }
     public Teacher deleteTeacher(Teacher teacher){
-        String deleteSQL = "DELETE FROM teachers WHERE teacher_id = ?";
+        String deleteSQL = "DELETE FROM teachers WHERE id = ?";
         try(PreparedStatement pstmt = con.prepareStatement(deleteSQL)){
-            pstmt.setInt(1, teacher.getTeacher_id());
+            pstmt.setInt(1, teacher.getId());
             int rowAffected = pstmt.executeUpdate();
             if (rowAffected > 0) {
                 return teacher;
@@ -57,16 +56,16 @@ public class TeacherDao {
         }
     }
     public Teacher searchTeacher(Teacher teacher){
-        String searchSQL = "SELECT * FROM teachers WHERE teacher_id = ?";
+        String searchSQL = "SELECT * FROM teachers WHERE id = ?";
         try(PreparedStatement pstmt = con.prepareStatement(searchSQL)){
-            pstmt.setInt(1, teacher.getTeacher_id());
+            pstmt.setInt(1, teacher.getId());
             try(ResultSet rs = pstmt.executeQuery()){
                 if(rs.next()){
-                    teacher.setTeacher_id(rs.getInt("teacher_id"));
-                    teacher.setTeacher_name(rs.getString("name"));
-                    teacher.setTeacher_department(rs.getString("department"));
-                    teacher.setTeacher_course(rs.getString("course"));
-                    teacher.setTeacher_salary(rs.getLong("salary"));
+                    teacher.setId(rs.getInt("teacher_id"));
+                    teacher.setName(rs.getString("name"));
+                    teacher.setDepartment(rs.getString("department"));
+                    teacher.setCourse(rs.getString("course"));
+                    teacher.setSalary(rs.getLong("salary"));
                     return teacher;
                 }
                 else{
@@ -86,12 +85,12 @@ public class TeacherDao {
         ResultSet rs = stmt.executeQuery(searchSQL);
         while(rs.next()){
             Teacher teacher = new Teacher();
-            teacher.setTeacher_id(rs.getInt("teacher_id"));
-            teacher.setTeacher_name(rs.getString("name"));
-            teacher.setTeacher_department(rs.getString("department"));
-            teacher.setTeacher_course(rs.getString("course"));
-            teacher.setTeacher_salary(rs.getLong("salary"));
-            teacher.setTeacher_email(rs.getString("email"));
+            teacher.setId(rs.getInt("teacher_id"));
+            teacher.setName(rs.getString("name"));
+            teacher.setDepartment(rs.getString("department"));
+            teacher.setCourse(rs.getString("course"));
+            teacher.setSalary(rs.getLong("salary"));
+            teacher.setEmail(rs.getString("email"));
             teachers.add(teacher);
         }
         return teachers;

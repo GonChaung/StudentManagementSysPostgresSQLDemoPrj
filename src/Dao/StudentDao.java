@@ -9,13 +9,13 @@ import java.util.List;
 public class StudentDao {
     Connection con= DatabaseUtil.getConnection();
     public Student studentUpdate(Student student) {
-        String updateSQL = "UPDATE students SET name = ?, phone = ?, email = ?, department = ? WHERE student_id = ?";
+        String updateSQL = "UPDATE students SET name = ?, phone = ?, email = ?, department = ? WHERE id = ?";
         try (PreparedStatement pstmt = con.prepareStatement(updateSQL)) {
-            pstmt.setString(1, student.getStudent_name());
-            pstmt.setString(2, student.getStudent_phone());
-            pstmt.setString(3, student.getStudent_email());
-            pstmt.setString(4, student.getStudent_department());
-            pstmt.setInt(5, student.getStudent_id());
+            pstmt.setString(1, student.getName());
+            pstmt.setString(2, student.getPhone());
+            pstmt.setString(3, student.getEmail());
+            pstmt.setString(4, student.getDepartment());
+            pstmt.setInt(5, student.getId());
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 return student;
@@ -28,10 +28,10 @@ public class StudentDao {
     public Student insertStudent(Student student) {
         String insertSQL = "INSERT INTO students (name, phone, email, department) VALUES (?,?,?,?)";
         try(PreparedStatement pstmt = con.prepareStatement(insertSQL)){
-            pstmt.setString(1, student.getStudent_name());
-            pstmt.setString(2, student.getStudent_phone());
-            pstmt.setString(3, student.getStudent_email());
-            pstmt.setString(4, student.getStudent_department());
+            pstmt.setString(1, student.getName());
+            pstmt.setString(2, student.getPhone());
+            pstmt.setString(3, student.getEmail());
+            pstmt.setString(4, student.getDepartment());
             int rowAffected = pstmt.executeUpdate();
             if (rowAffected > 0) {
                 return student;
@@ -41,16 +41,16 @@ public class StudentDao {
         }
     }
     public Student searchStudent(Student student) {
-        String searchSQL = "SELECT * FROM students WHERE student_id = ?";
+        String searchSQL = "SELECT * FROM students WHERE id = ?";
         try(PreparedStatement pstmt = con.prepareStatement(searchSQL)){
-            pstmt.setInt(1, student.getStudent_id());
+            pstmt.setInt(1, student.getId());
             try(ResultSet rs = pstmt.executeQuery()){
                 if(rs.next()){
-                    student.setStudent_id(rs.getInt("student_id"));
-                    student.setStudent_name(rs.getString("name"));
-                    student.setStudent_phone(rs.getString("phone"));
-                    student.setStudent_email(rs.getString("email"));
-                    student.setStudent_department(rs.getString("department"));
+                    student.setId(rs.getInt("id"));
+                    student.setName(rs.getString("name"));
+                    student.setPhone(rs.getString("phone"));
+                    student.setEmail(rs.getString("email"));
+                    student.setDepartment(rs.getString("department"));
                     return student;
                 }
                 else{
@@ -64,9 +64,9 @@ public class StudentDao {
         }
     }
     public Student deleteStudent(Student student) {
-        String deleteSQL = "DELETE FROM students WHERE name = ? AND student_id = ?";
+        String deleteSQL = "DELETE FROM students WHERE name = ? AND id = ?";
         try(PreparedStatement pstmt = con.prepareStatement(deleteSQL)){
-            pstmt.setInt(2, student.getStudent_id());
+            pstmt.setInt(2, student.getId());
             int rowsAffected = pstmt.executeUpdate();
             if(rowsAffected > 0){
                 return student;
@@ -83,11 +83,11 @@ public class StudentDao {
         ResultSet rs = stmt.executeQuery(searchSQL);
         while(rs.next()){
             Student student = new Student();
-            student.setStudent_id(rs.getInt("student_id"));
-            student.setStudent_name(rs.getString("name"));
-            student.setStudent_phone(rs.getString("phone"));
-            student.setStudent_email(rs.getString("email"));
-            student.setStudent_department(rs.getString("department"));
+            student.setId(rs.getInt("id"));
+            student.setName(rs.getString("name"));
+            student.setPhone(rs.getString("phone"));
+            student.setEmail(rs.getString("email"));
+            student.setDepartment(rs.getString("department"));
             students.add(student);
         }
         return students;

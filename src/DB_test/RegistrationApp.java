@@ -12,7 +12,7 @@ public class RegistrationApp {
         TeacherController tc = new TeacherController();
         EmployeeController ec = new EmployeeController();
         while(work.equals("yes")){
-            System.out.println(" For student or teacher ?");
+            System.out.println(" For student or teacher or employee ?");
             String choice = br.readLine();
             switch(choice){
                 case "student" : sc.studentRegister();

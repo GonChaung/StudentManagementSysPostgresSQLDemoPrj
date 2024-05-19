@@ -19,15 +19,15 @@ public class TeacherService {
     public void insertTeacher() throws IOException {
         Teacher teacher = new Teacher();
         System.out.println("Enter Teacher Name: ");
-        teacher.setTeacher_name(br.readLine());
+        teacher.setName(br.readLine());
         System.out.println("Enter Teacher Department: ");
-        teacher.setTeacher_department(br.readLine());
+        teacher.setDepartment(br.readLine());
         System.out.println("Enter Teacher Course: ");
-        teacher.setTeacher_course(br.readLine());
+        teacher.setCourse(br.readLine());
         System.out.println("Enter Teacher Salary: ");
-        teacher.setTeacher_salary(Long.parseLong(br.readLine())); // Changed to Long.parseLong()
+        teacher.setSalary(Long.parseLong(br.readLine())); // Changed to Long.parseLong()
         System.out.println("Enter Teacher Email: ");
-        teacher.setTeacher_email(br.readLine());
+        teacher.setEmail(br.readLine());
 
         Teacher insertedTeacher = this.teacherDao.insertTeacher(teacher);
         if (insertedTeacher != null) {
@@ -40,21 +40,21 @@ public class TeacherService {
     public void updateTeacher() throws IOException {
         Teacher teacher = new Teacher();
         System.out.println("Enter Teacher ID: ");
-        teacher.setTeacher_id(Integer.parseInt(br.readLine()));
+        teacher.setId(Integer.parseInt(br.readLine()));
         System.out.println("Enter Teacher Name: ");
-        teacher.setTeacher_name(br.readLine());
+        teacher.setName(br.readLine());
         System.out.println("Enter Teacher Department: ");
-        teacher.setTeacher_department(br.readLine());
+        teacher.setDepartment(br.readLine());
         System.out.println("Enter Teacher Course: ");
-        teacher.setTeacher_course(br.readLine());
+        teacher.setCourse(br.readLine());
         System.out.println("Enter Teacher Salary: ");
-        teacher.setTeacher_salary(Long.parseLong(br.readLine())); // Changed to Long.parseLong()
+        teacher.setSalary(Long.parseLong(br.readLine())); // Changed to Long.parseLong()
         System.out.println("Enter Teacher Email: ");
-        teacher.setTeacher_email(br.readLine());
+        teacher.setEmail(br.readLine());
 
         Teacher updatedTeacher = this.teacherDao.updateTeacher(teacher);
         if (updatedTeacher != null) {
-            System.out.println(teacher.getTeacher_name() + " Teacher updated successfully.");
+            System.out.println(teacher.getName() + " Teacher updated successfully.");
         } else {
             System.out.println("Failed to update teacher data.");
         }
@@ -63,7 +63,7 @@ public class TeacherService {
     public void deleteTeacher() throws IOException {
         Teacher teacher = new Teacher();
         System.out.println("Enter Teacher ID: ");
-        teacher.setTeacher_id(Integer.parseInt(br.readLine()));
+        teacher.setId(Integer.parseInt(br.readLine()));
 
         Teacher deletedTeacher = this.teacherDao.deleteTeacher(teacher);
         if (deletedTeacher != null) {
@@ -76,17 +76,17 @@ public class TeacherService {
     public void searchTeacher() throws IOException {
         Teacher teacher = new Teacher();
         System.out.println("Enter Teacher ID: ");
-        teacher.setTeacher_id(Integer.parseInt(br.readLine()));
+        teacher.setId(Integer.parseInt(br.readLine()));
 
         Teacher foundTeacher = this.teacherDao.searchTeacher(teacher);
         if (foundTeacher != null) {
             System.out.println("Teacher found successfully.");
-            System.out.println("Teacher ID: " + foundTeacher.getTeacher_id());
-            System.out.println("Teacher Name: " + foundTeacher.getTeacher_name());
-            System.out.println("Teacher Department: " + foundTeacher.getTeacher_department());
-            System.out.println("Teacher Course: " + foundTeacher.getTeacher_course());
-            System.out.println("Teacher Salary: " + foundTeacher.getTeacher_salary());
-            System.out.println("Teacher Email: " + foundTeacher.getTeacher_email());
+            System.out.println("Teacher ID: " + foundTeacher.getId());
+            System.out.println("Teacher Name: " + foundTeacher.getName());
+            System.out.println("Teacher Department: " + foundTeacher.getDepartment());
+            System.out.println("Teacher Course: " + foundTeacher.getCourse());
+            System.out.println("Teacher Salary: " + foundTeacher.getSalary());
+            System.out.println("Teacher Email: " + foundTeacher.getEmail());
         } else {
             System.out.println("Failed to find teacher.");
         }
@@ -95,12 +95,12 @@ public class TeacherService {
     public void getAllTeacher() throws SQLException {
         List<Teacher> teachers = this.teacherDao.getAllTeacher();
         for (Teacher teacher : teachers) {
-            System.out.println("Teacher ID: " + teacher.getTeacher_id() +
-                    ", Teacher Name: " + teacher.getTeacher_name() +
-                    ", Teacher Department: " + teacher.getTeacher_department() +
-                    ", Teacher Course: " + teacher.getTeacher_course() +
-                    ", Teacher Salary: " + teacher.getTeacher_salary() +
-                    ", Teacher Email: " + teacher.getTeacher_email());
+            System.out.println("Teacher ID: " + teacher.getId() +
+                    ", Teacher Name: " + teacher.getName() +
+                    ", Teacher Department: " + teacher.getDepartment() +
+                    ", Teacher Course: " + teacher.getCourse() +
+                    ", Teacher Salary: " + teacher.getSalary() +
+                    ", Teacher Email: " + teacher.getEmail());
         }
     }
 }

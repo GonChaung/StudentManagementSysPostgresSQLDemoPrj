@@ -1,70 +1,70 @@
 package Model;
 
 public class Teacher {
-    public int teacher_id;
-    public String teacher_name;
-    public String teacher_department;
-    public String teacher_course;
-    public long teacher_salary;
-    public String teacher_email;
+    public int id;
+    public String name;
+    public String department;
+    public String course;
+    public long salary;
+    public String email;
 
     public Teacher() {
     }
 
-    public Teacher(int teacher_id, String teacher_name, String teacher_department, String teacher_course, int teacher_salary, String teacher_email) {
-        this.teacher_id = teacher_id;
-        this.teacher_name = teacher_name;
-        this.teacher_department = teacher_department;
-        this.teacher_course = teacher_course;
-        this.teacher_salary = teacher_salary;
-        this.teacher_email = teacher_email;
+    public Teacher(int id, String name, String department, String course, int salary, String email) {
+        this.id = id;
+        this.name = name;
+        this.department = department;
+        this.course = course;
+        this.salary = salary;
+        this.email = email;
     }
 
-    public int getTeacher_id() {
-        return teacher_id;
+    public int getId() {
+        return id;
     }
 
-    public void setTeacher_id(int teacher_id) {
-        this.teacher_id = teacher_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getTeacher_name() {
-        return teacher_name;
+    public String getName() {
+        return name;
     }
 
-    public void setTeacher_name(String teacher_name) {
-        this.teacher_name = teacher_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTeacher_department() {
-        return teacher_department;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setTeacher_department(String teacher_department) {
-        this.teacher_department = teacher_department;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
-    public String getTeacher_course() {
-        return teacher_course;
+    public String getCourse() {
+        return course;
     }
 
-    public void setTeacher_course(String teacher_course) {
-        this.teacher_course = teacher_course;
+    public void setCourse(String course) {
+        this.course = course;
     }
 
-    public long getTeacher_salary() {
-        return teacher_salary;
+    public long getSalary() {
+        return salary;
     }
 
-    public void setTeacher_salary(long teacher_salary) {
-        this.teacher_salary = teacher_salary;
+    public void setSalary(long salary) {
+        this.salary = salary;
     }
 
-    public String getTeacher_email() {
-        return teacher_email;
+    public String getEmail() {
+        return email;
     }
 
-    public void setTeacher_email(String teacher_email) {
-        this.teacher_email = teacher_email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
