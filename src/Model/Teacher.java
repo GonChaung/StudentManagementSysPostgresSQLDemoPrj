@@ -1,51 +1,31 @@
 package Model;
 
-public class Teacher {
-    public int id;
-    public String name;
-    public String department;
+public class Teacher extends Person{
+    public Department department;
     public String course;
     public long salary;
-    public String email;
 
     public Teacher() {
     }
 
-    public Teacher(int id, String name, String department, String course, int salary, String email) {
-        this.id = id;
-        this.name = name;
+    public Teacher(int id, String name, String age, String gender, String phone, String email, String course, long salary) {
+        super(id, name, age, gender, phone, email);
         this.department = department;
         this.course = course;
         this.salary = salary;
-        this.email = email;
     }
 
-    public int getId() {
-        return id;
+
+    public Department getDepartment() {
+        return this.department;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 
     public String getCourse() {
-        return course;
+        return this.course;
     }
 
     public void setCourse(String course) {
@@ -53,18 +33,11 @@ public class Teacher {
     }
 
     public long getSalary() {
-        return salary;
+        return this.salary;
     }
 
     public void setSalary(long salary) {
         this.salary = salary;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

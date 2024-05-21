@@ -27,16 +27,7 @@ public class StudentService {
             System.out.println("student Department : " + searchStudent.getDepartment());
         }else System.out.println("There is no student with ID " + student.getId());
     }
-    public void insertStudent() throws IOException {
-        Student student = new Student();
-        System.out.println("Name : " ) ;
-        student.setName(br.readLine());
-        System.out.println("Phone : ");
-        student.setPhone(br.readLine());
-        System.out.println("Email : ");
-        student.setEmail(br.readLine());
-        System.out.println("Department : ");
-        student.setDepartment(br.readLine());
+    public void insertStudent(Student student) throws IOException {
         Student insertedStudent = this.studentDao.insertStudent(student);
         if(insertedStudent != null) {
             System.out.println(" New Student Added Successfully");
@@ -51,28 +42,11 @@ public class StudentService {
             System.out.println(" Student " + student.getId() + " deleted successfully");
         }else System.out.println("There is no student with ID " + student.getId());
     }
-    public void getAllStudents() throws SQLException, IOException {
+    public List<Student> getAllStudents() throws SQLException, IOException {
        List<Student> students = this.studentDao.getAllStudents();
-       for(Student student : students){
-           System.out.println(" student id "+ student.getId() +
-                   "/ name " + student.getName() +
-                   "/ phone " + student.getPhone() +
-                   "/ department " + student.getDepartment() +
-                   "/ email " + student.getEmail());
-       }
+       return students;
     }
-    public void updateStudent() throws IOException {
-        Student student = new Student();
-        System.out.println("Type student ID : ");
-        student.setId(Integer.parseInt(br.readLine()));
-        System.out.println("Type student name : ");
-        student.setName( br.readLine());
-        System.out.println("Type student phone : ");
-        student.setPhone( br.readLine());
-        System.out.println("Type student email : ");
-        student.setEmail(br.readLine());
-        System.out.println("Type student department : ");
-        student.setDepartment(br.readLine());
+    public void updateStudent(Student student) throws IOException {
         Student updatedStudent=this.studentDao.studentUpdate(student);
         if(updatedStudent!=null){
                 System.out.println(" Student " + updatedStudent.getName() + '(' + updatedStudent.getId() + ')' + " updated successfully");

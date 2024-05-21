@@ -1,5 +1,6 @@
 package Dao;
 
+import Model.Department;
 import Model.Student;
 import Utils.DatabaseUtil;
 import java.sql.*;
@@ -8,14 +9,21 @@ import java.util.List;
 
 public class StudentDao {
     Connection con= DatabaseUtil.getConnection();
+    private DepartmentDao departmentDao;
+    public StudentDao() {
+       this.departmentDao=new DepartmentDao();
+    }
+
     public Student studentUpdate(Student student) {
-        String updateSQL = "UPDATE students SET name = ?, phone = ?, email = ?, department = ? WHERE id = ?";
+        String updateSQL = "UPDATE students SET name = ?, phone = ?, email = ?, department_id = ?, age = ?, gender = ? WHERE id = ?";
         try (PreparedStatement pstmt = con.prepareStatement(updateSQL)) {
             pstmt.setString(1, student.getName());
             pstmt.setString(2, student.getPhone());
             pstmt.setString(3, student.getEmail());
-            pstmt.setString(4, student.getDepartment());
-            pstmt.setInt(5, student.getId());
+            pstmt.setString(4, student.getDepartment().getId()+"");
+            pstmt.setString(5, student.getAge());
+            pstmt.setString(6, student.getGender());
+            pstmt.setInt(7, student.getId());
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 return student;
@@ -26,12 +34,14 @@ public class StudentDao {
         }
     }
     public Student insertStudent(Student student) {
-        String insertSQL = "INSERT INTO students (name, phone, email, department) VALUES (?,?,?,?)";
+        String insertSQL = "INSERT INTO students (name, phone, email, department_id,age,gender) VALUES (?,?,?,?,?,?)";
         try(PreparedStatement pstmt = con.prepareStatement(insertSQL)){
             pstmt.setString(1, student.getName());
             pstmt.setString(2, student.getPhone());
             pstmt.setString(3, student.getEmail());
-            pstmt.setString(4, student.getDepartment());
+            pstmt.setInt(4, student.getDepartment().getId());
+            pstmt.setString(5, student.getAge());
+            pstmt.setString(6, student.getGender());
             int rowAffected = pstmt.executeUpdate();
             if (rowAffected > 0) {
                 return student;
@@ -50,7 +60,9 @@ public class StudentDao {
                     student.setName(rs.getString("name"));
                     student.setPhone(rs.getString("phone"));
                     student.setEmail(rs.getString("email"));
-                    student.setDepartment(rs.getString("department"));
+                    student.setDepartment(this.departmentDao.searchDepartmentById(rs.getInt("department_id")));
+                    student.setAge(rs.getString("age"));
+                    student.setGender(rs.getString("gender"));
                     return student;
                 }
                 else{
@@ -87,7 +99,10 @@ public class StudentDao {
             student.setName(rs.getString("name"));
             student.setPhone(rs.getString("phone"));
             student.setEmail(rs.getString("email"));
-            student.setDepartment(rs.getString("department"));
+            Department department = this.departmentDao.searchDepartmentById(rs.getInt("department_id"));
+            student.setDepartment(department);
+            student.setAge(rs.getString("age"));
+            student.setGender(rs.getString("gender"));
             students.add(student);
         }
         return students;

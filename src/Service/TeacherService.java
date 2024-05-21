@@ -1,6 +1,7 @@
 package Service;
 
 import Dao.TeacherDao;
+import Model.Student;
 import Model.Teacher;
 import Utils.DataUtil;
 import java.io.BufferedReader;
@@ -16,47 +17,17 @@ public class TeacherService {
         this.teacherDao = new TeacherDao();
     }
 
-    public void insertTeacher() throws IOException {
-        Teacher teacher = new Teacher();
-        System.out.println("Enter Teacher Name: ");
-        teacher.setName(br.readLine());
-        System.out.println("Enter Teacher Department: ");
-        teacher.setDepartment(br.readLine());
-        System.out.println("Enter Teacher Course: ");
-        teacher.setCourse(br.readLine());
-        System.out.println("Enter Teacher Salary: ");
-        teacher.setSalary(Long.parseLong(br.readLine())); // Changed to Long.parseLong()
-        System.out.println("Enter Teacher Email: ");
-        teacher.setEmail(br.readLine());
-
-        Teacher insertedTeacher = this.teacherDao.insertTeacher(teacher);
-        if (insertedTeacher != null) {
-            System.out.println("Teacher added successfully.");
-        } else {
-            System.out.println("Failed to add teacher.");
+    public void insertTeacher(Teacher teacher) throws IOException {
+        Teacher insertedStudent = this.teacherDao.insertTeacher(teacher);
+        if(insertedStudent != null) {
+            System.out.println(" New Student Added Successfully");
         }
     }
 
-    public void updateTeacher() throws IOException {
-        Teacher teacher = new Teacher();
-        System.out.println("Enter Teacher ID: ");
-        teacher.setId(Integer.parseInt(br.readLine()));
-        System.out.println("Enter Teacher Name: ");
-        teacher.setName(br.readLine());
-        System.out.println("Enter Teacher Department: ");
-        teacher.setDepartment(br.readLine());
-        System.out.println("Enter Teacher Course: ");
-        teacher.setCourse(br.readLine());
-        System.out.println("Enter Teacher Salary: ");
-        teacher.setSalary(Long.parseLong(br.readLine())); // Changed to Long.parseLong()
-        System.out.println("Enter Teacher Email: ");
-        teacher.setEmail(br.readLine());
-
+    public void updateTeacher(Teacher teacher) throws IOException {
         Teacher updatedTeacher = this.teacherDao.updateTeacher(teacher);
-        if (updatedTeacher != null) {
-            System.out.println(teacher.getName() + " Teacher updated successfully.");
-        } else {
-            System.out.println("Failed to update teacher data.");
+        if(updatedTeacher!=null){
+            System.out.println(" Student " + updatedTeacher.getName() + '(' + updatedTeacher.getId() + ')' + " updated successfully");
         }
     }
 
@@ -64,7 +35,6 @@ public class TeacherService {
         Teacher teacher = new Teacher();
         System.out.println("Enter Teacher ID: ");
         teacher.setId(Integer.parseInt(br.readLine()));
-
         Teacher deletedTeacher = this.teacherDao.deleteTeacher(teacher);
         if (deletedTeacher != null) {
             System.out.println("Teacher deleted successfully.");
@@ -92,15 +62,8 @@ public class TeacherService {
         }
     }
 
-    public void getAllTeacher() throws SQLException {
+    public List<Teacher> getAllTeacher() throws SQLException, IOException {
         List<Teacher> teachers = this.teacherDao.getAllTeacher();
-        for (Teacher teacher : teachers) {
-            System.out.println("Teacher ID: " + teacher.getId() +
-                    ", Teacher Name: " + teacher.getName() +
-                    ", Teacher Department: " + teacher.getDepartment() +
-                    ", Teacher Course: " + teacher.getCourse() +
-                    ", Teacher Salary: " + teacher.getSalary() +
-                    ", Teacher Email: " + teacher.getEmail());
-        }
+        return teachers;
     }
 }

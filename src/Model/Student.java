@@ -1,47 +1,16 @@
 package Model;
-public class Student {
-    public int id;
-    public String name;
-    public String email;
-    public String phone;
-    public String department;
+public class Student extends Person {
+    public Department department;
+    public Student(){}
 
-    public Student(int id, String name, String email, String phone, String department) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
+    public Student(int id, String name, String age, String gender, String phone, String email, Department department) {
+        super(id, name, age, gender, phone, email);
         this.department = department;
     }
-    public Student(){}
-    public int getId() {
-        return id;
+    public Department getDepartment() {
+        return this.department;
     }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getPhone() {
-        return phone;
-    }
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-    public String getDepartment() {
-        return department;
-    }
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 }

@@ -1,41 +1,20 @@
 package Model;
 
-public class Employee {
-    public int id;
-    public String name;
-    public String department;
+public class Employee extends Person {
     public long salary;
-    public String phone;
-
-    public Employee(int id, String name, String department, long salary, String phone) {
-        this.id = id;
-        this.name = name;
-        this.department = department;
-        this.salary = salary;
-        this.phone = phone;
-    }
-
+    public String department;
     public Employee() {
     }
 
-    public int getId() {
-        return id;
+    public Employee(int id, String name, String age, String gender, String phone, String email, long salary, String department) {
+        super(id, name, age, gender, phone, email);
+        this.salary = salary;
+        this.department = department;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getDepartment() {
-        return department;
+        return this.department;
     }
 
     public void setDepartment(String department) {
@@ -43,18 +22,11 @@ public class Employee {
     }
 
     public long getSalary() {
-        return salary;
+        return this.salary;
     }
 
     public void setSalary(long salary) {
         this.salary = salary;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 }
