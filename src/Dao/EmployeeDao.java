@@ -1,6 +1,7 @@
 package Dao;
 
 import Model.Employee;
+import Model.EmployeeType;
 import Utils.DatabaseUtil;
 
 import java.sql.*;
@@ -9,13 +10,18 @@ import java.util.List;
 
 public class EmployeeDao {
     Connection con = DatabaseUtil.getConnection();
+    private EmployeeTypeDao employeeTypeDao;
+    public EmployeeDao() {
+        this.employeeTypeDao = new EmployeeTypeDao();
+    }
+
 
     public Employee employeeUpdate(Employee employee) {
-        String updateSQL = "UPDATE employees SET name = ?, phone = ?, department = ?, salary = ?, age = ?, gender = ? WHERE id = ?";
+        String updateSQL = "UPDATE employees SET name = ?, phone = ?, type_id = ?, salary = ?, age = ?, gender = ? WHERE id = ?";
         try (PreparedStatement pstmt = con.prepareStatement(updateSQL)) {
             pstmt.setString(1, employee.getName());
             pstmt.setString(2, employee.getPhone());
-            pstmt.setString(3, employee.getDepartment());
+            pstmt.setString(3, employee.getEmployeeType().getName());
             pstmt.setDouble(4, employee.getSalary());
             pstmt.setString(5,employee.getAge());
             pstmt.setString(6, employee.getGender());
@@ -32,14 +38,15 @@ public class EmployeeDao {
     }
 
     public Employee insertEmployee(Employee employee) {
-        String insertSQL = "INSERT INTO employees (name, phone, department, salary,age,gender) VALUES (?,?,?,?,?,?)";
+        String insertSQL = "INSERT INTO employees (name, salary, phone, age, gender, type_id) VALUES (?,?,?,?,?,?)";
         try (PreparedStatement pstmt = con.prepareStatement(insertSQL)) {
             pstmt.setString(1, employee.getName());
-            pstmt.setString(2, employee.getPhone());
-            pstmt.setString(3, employee.getDepartment());
-            pstmt.setDouble(4, employee.getSalary());
-            pstmt.setString(5, employee.getAge());
-            pstmt.setString(6, employee.getGender());
+            pstmt.setString(3, employee.getPhone());
+            pstmt.setDouble(2, employee.getSalary());
+            pstmt.setString(4, employee.getAge());
+            pstmt.setString(5, employee.getGender());
+            System.out.println(employee.getEmployeeType().getId());
+            pstmt.setInt(6, employee.getEmployeeType().getId());
             int rowAffected = pstmt.executeUpdate();
             if (rowAffected > 0) {
                 return employee;
@@ -60,7 +67,7 @@ public class EmployeeDao {
                     employee.setId(rs.getInt("id"));
                     employee.setName(rs.getString("name"));
                     employee.setPhone(rs.getString("phone"));
-                    employee.setDepartment(rs.getString("department"));
+                    employee.setEmployeeTypeID(this.employeeTypeDao.searchEmployeeTypeByID(rs.getInt("type_id")));
                     employee.setSalary(rs.getLong("salary"));
                     employee.setAge(rs.getString("age"));
                     employee.setGender(rs.getString("gender"));
@@ -101,7 +108,9 @@ public class EmployeeDao {
             employee.setId(rs.getInt("id"));
             employee.setName(rs.getString("name"));
             employee.setPhone(rs.getString("phone"));
-            employee.setDepartment(rs.getString("department"));
+            EmployeeType employeeType = this.employeeTypeDao.searchEmployeeTypeByID(rs.getInt("type_id"));
+            // System.out.println(employeeType.getName());
+            employee.setEmployeeTypeID(employeeType);
             employee.setSalary(rs.getLong("salary"));
             employee.setAge(rs.getString("age"));
             employee.setGender(rs.getString("gender"));

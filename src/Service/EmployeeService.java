@@ -2,6 +2,7 @@ package Service;
 
 import Dao.EmployeeDao;
 import Model.Employee;
+import Model.EmployeeType;
 import Utils.DataUtil;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,23 +26,14 @@ public class EmployeeService {
             System.out.println("employee ID :" + searchEmployee.getId());
             System.out.println("employee Name :" + searchEmployee.getName());
             System.out.println("employee Phone :" + searchEmployee.getPhone());
-            System.out.println("employee Department : " + searchEmployee.getDepartment());
+            System.out.println("employee Department : " + searchEmployee.getEmployeeType());
             System.out.println("employee Salary : " + searchEmployee.getSalary());
         } else {
             System.out.println("There is no employee with ID " + employee.getId());
         }
     }
 
-    public void insertEmployee() throws IOException {
-        Employee employee = new Employee();
-        System.out.println("Name : ");
-        employee.setName(br.readLine());
-        System.out.println("Phone : ");
-        employee.setPhone(br.readLine());
-        System.out.println("Department : ");
-        employee.setDepartment(br.readLine());
-        System.out.println("Salary : ");
-        employee.setSalary(Long.parseLong(br.readLine()));
+    public void insertEmployee(Employee employee) throws IOException, SQLException {
         Employee insertedEmployee = this.employeeDao.insertEmployee(employee);
         if (insertedEmployee != null) {
             System.out.println("New Employee Added Successfully");
@@ -60,29 +52,12 @@ public class EmployeeService {
         }
     }
 
-    public void getAllEmployees() throws SQLException, IOException {
+    public List<Employee> getAllEmployees() throws SQLException, IOException {
         List<Employee> employees = this.employeeDao.getAllEmployees();
-        for (Employee employee : employees) {
-            System.out.println("employee id " + employee.getId() +
-                    "/ name " + employee.getName() +
-                    "/ phone " + employee.getPhone() +
-                    "/ department " + employee.getDepartment() +
-                    "/ salary " + employee.getSalary());
-        }
+        return employees;
     }
 
-    public void updateEmployee() throws IOException {
-        Employee employee = new Employee();
-        System.out.println("Type employee ID : ");
-        employee.setId(Integer.parseInt(br.readLine()));
-        System.out.println("Type employee name : ");
-        employee.setName(br.readLine());
-        System.out.println("Type employee phone : ");
-        employee.setPhone(br.readLine());
-        System.out.println("Type employee department : ");
-        employee.setDepartment(br.readLine());
-        System.out.println("Type employee salary : ");
-        employee.setSalary(Long.parseLong(br.readLine()));
+    public void updateEmployee(Employee employee) throws IOException {
         Employee updatedEmployee = this.employeeDao.employeeUpdate(employee);
         if (updatedEmployee != null) {
             System.out.println("Employee " + updatedEmployee.getName() + '(' + updatedEmployee.getId() + ')' + " updated successfully");

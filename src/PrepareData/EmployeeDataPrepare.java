@@ -1,6 +1,9 @@
 package PrepareData;
 
+import Dao.EmployeeDao;
+import Dao.EmployeeTypeDao;
 import Model.Employee;
+import Model.EmployeeType;
 import Utils.DataUtil;
 
 import java.io.BufferedReader;
@@ -10,8 +13,10 @@ import java.util.List;
 
 public class EmployeeDataPrepare {
     BufferedReader br = DataUtil.br;
+    private EmployeeTypeDao employeeTypeDao;
 
     public EmployeeDataPrepare() {
+        this.employeeTypeDao = new EmployeeTypeDao();
     }
 
     public Employee prepareEmployeeForRegisteration() throws IOException, SQLException {
@@ -20,8 +25,14 @@ public class EmployeeDataPrepare {
         employee.setName(br.readLine());
         System.out.println("Phone : ");
         employee.setPhone(br.readLine());
-        System.out.println("Department : ");
-        employee.setDepartment(br.readLine());
+        System.out.println(" Select employeeType : ");
+        for(EmployeeType employeeType : this.employeeTypeDao.getAllEmployeeTypeID()){
+            System.out.println("ID : " + employeeType.getId() + " Name : " + employeeType.getName());
+        }
+        System.out.println(" Enter Employee ID : ");
+        EmployeeType employeeType = new EmployeeType();
+        employeeType.setId(Integer.parseInt(br.readLine()));
+        employee.setEmployeeTypeID(employeeType);
         System.out.println("Salary : ");
         employee.setSalary(Long.parseLong(br.readLine()));
         return employee;
@@ -35,20 +46,22 @@ public class EmployeeDataPrepare {
         employee.setName(br.readLine());
         System.out.println("Type employee phone : ");
         employee.setPhone(br.readLine());
-        System.out.println("Type employee department : ");
-        employee.setDepartment(br.readLine());
+        System.out.println("Type employee service : ");
+        EmployeeType employeeType = new EmployeeType();
+        employeeType.setId(Integer.parseInt(br.readLine()));
+        employee.setEmployeeTypeID(employeeType);
         System.out.println("Type employee salary : ");
         employee.setSalary(Long.parseLong(br.readLine()));
         return employee;
     }
 
     public void displayEmployee(List<Employee> employees) {
-        for(Employee employee : employees){
-            System.out.println(" employee id "+ employee.getId() +
+        for (Employee employee : employees) {
+            System.out.println("employee id " + employee.getId() +
                     "/ name " + employee.getName() +
                     "/ phone " + employee.getPhone() +
-                    "/ department " + employee.getDepartment() +
-                    "/ email " + employee.getEmail());
+                    "/ serviceID " + employee.getEmployeeType().getName() +
+                    "/ salary " + employee.getSalary());
         }
     }
 }

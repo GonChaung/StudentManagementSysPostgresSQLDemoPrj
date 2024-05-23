@@ -2,24 +2,16 @@ package Model;
 
 public class Employee extends Person {
     public long salary;
-    public String department;
+    public EmployeeType employeeType;
     public Employee() {
     }
 
-    public Employee(int id, String name, String age, String gender, String phone, String email, long salary, String department) {
+    public Employee(int id, String name, String age, String gender, String phone, String email, long salary, EmployeeType employeeType) {
         super(id, name, age, gender, phone, email);
         this.salary = salary;
-        this.department = department;
+        this.employeeType= employeeType;
     }
 
-
-    public String getDepartment() {
-        return this.department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
 
     public long getSalary() {
         return this.salary;
@@ -29,4 +21,11 @@ public class Employee extends Person {
         this.salary = salary;
     }
 
+    public EmployeeType getEmployeeType() {
+        return this.employeeType;
+    }
+
+    public void setEmployeeTypeID(EmployeeType employeeType) {
+        this.employeeType = employeeType;
+    }
 }

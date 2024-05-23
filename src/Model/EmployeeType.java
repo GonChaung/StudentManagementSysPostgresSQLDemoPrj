@@ -1,17 +1,17 @@
 package Model;
 
-public class Service {
+public class EmployeeType {
     public int id;
     public String name;
     public String address;
 
-    public Service(int id, String name, String address) {
+    public EmployeeType(int id, String name, String address) {
         this.id = id;
         this.name = name;
         this.address = address;
     }
 
-    public Service() {
+    public EmployeeType() {
     }
 
     public int getId() {

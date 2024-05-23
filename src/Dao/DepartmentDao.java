@@ -1,7 +1,6 @@
 package Dao;
 
 import Model.Department;
-import Model.Student;
 import Utils.DatabaseUtil;
 import java.sql.PreparedStatement;
 import java.sql.*;
