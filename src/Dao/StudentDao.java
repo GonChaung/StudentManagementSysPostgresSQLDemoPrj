@@ -76,9 +76,9 @@ public class StudentDao {
         }
     }
     public Student deleteStudent(Student student) {
-        String deleteSQL = "DELETE FROM students WHERE name = ? AND id = ?";
+        String deleteSQL = "DELETE FROM students WHERE id = ?";
         try(PreparedStatement pstmt = con.prepareStatement(deleteSQL)){
-            pstmt.setInt(2, student.getId());
+            pstmt.setInt(1, student.getId());
             int rowsAffected = pstmt.executeUpdate();
             if(rowsAffected > 0){
                 return student;

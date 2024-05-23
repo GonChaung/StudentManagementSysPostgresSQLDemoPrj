@@ -2,11 +2,11 @@ package Service;
 
 import Dao.EmployeeDao;
 import Model.Employee;
-import Model.EmployeeType;
 import Utils.DataUtil;
+
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.SQLException;
 import java.util.List;
 
 public class EmployeeService {
@@ -26,7 +26,7 @@ public class EmployeeService {
             System.out.println("employee ID :" + searchEmployee.getId());
             System.out.println("employee Name :" + searchEmployee.getName());
             System.out.println("employee Phone :" + searchEmployee.getPhone());
-            System.out.println("employee Department : " + searchEmployee.getEmployeeType());
+            System.out.println("employee Department : " + searchEmployee.getEmployeeType().getName());
             System.out.println("employee Salary : " + searchEmployee.getSalary());
         } else {
             System.out.println("There is no employee with ID " + employee.getId());
@@ -52,15 +52,14 @@ public class EmployeeService {
         }
     }
 
-    public List<Employee> getAllEmployees() throws SQLException, IOException {
-        List<Employee> employees = this.employeeDao.getAllEmployees();
-        return employees;
-    }
-
     public void updateEmployee(Employee employee) throws IOException {
         Employee updatedEmployee = this.employeeDao.employeeUpdate(employee);
         if (updatedEmployee != null) {
             System.out.println("Employee " + updatedEmployee.getName() + '(' + updatedEmployee.getId() + ')' + " updated successfully");
         }
+    }
+
+    public List<Employee> getAllEmployees() throws SQLException, IOException {
+        return this.employeeDao.getAllEmployees();
     }
 }

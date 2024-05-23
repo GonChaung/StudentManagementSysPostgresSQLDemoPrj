@@ -37,4 +37,9 @@ public class EmployeeType {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

@@ -35,11 +35,13 @@ public class StudentController {
                 break;
 
             case 2:
-                this.studentService.searchStudent();
+                Student studentSearch = this.studentDataPrepare.prepareStudentForSearch();
+                this.studentService.searchStudent(studentSearch);
                 break;
 
             case 3:
-                this.studentService.deleteStudent();
+                Student studentDelete = this.studentDataPrepare.prepareStudentForDelete();
+                this.studentService.deleteStudent(studentDelete);
                 break;
 
             case 4:

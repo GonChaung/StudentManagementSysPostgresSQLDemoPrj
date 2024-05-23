@@ -1,6 +1,7 @@
 package PrepareData;
 
 import Dao.DepartmentDao;
+import Dao.StudentDao;
 import Model.Department;
 import Model.Student;
 import Utils.DataUtil;
@@ -13,9 +14,10 @@ import java.util.List;
 public class StudentDataPrepare {
     BufferedReader br = DataUtil.br;
     private DepartmentDao departmentDao;
-
+    private StudentDao studentDao;
     public StudentDataPrepare() {
      this.departmentDao=new DepartmentDao();
+        this.studentDao = new StudentDao();
 
     }
 
@@ -37,6 +39,20 @@ public class StudentDataPrepare {
         student.setDepartment(department);
         return student;
     }
+    public Student prepareStudentForSearch() throws IOException, SQLException {
+        Student student = new Student();
+        System.out.println("Type student ID : ");
+        student.setId(Integer.parseInt(br.readLine()));
+        Student searchStudent = this.studentDao.searchStudent(student);
+        if(searchStudent != null) {
+            System.out.println("student ID :" + searchStudent.getId());
+            System.out.println("student Name :" + searchStudent.getName());
+            System.out.println("student Email :" + searchStudent.getEmail());
+            System.out.println("student Phone :" + searchStudent.getPhone());
+            System.out.println("student Department : " + searchStudent.getDepartment().getName());
+        }else System.out.println("There is no student with ID " + student.getId());
+        return student;
+    }
     public Student prepareStudentForUpdate() throws IOException {
         Student student = new Student();
         System.out.println("Type student ID : ");
@@ -51,6 +67,13 @@ public class StudentDataPrepare {
         Department department = new Department();
         department.setId(Integer.parseInt(br.readLine()));
         student.setDepartment(department);
+        return student;
+    }
+
+    public Student prepareStudentForDelete() throws IOException {
+        Student student = new Student();
+        System.out.println(" Type your student id : ");
+        student.setId(Integer.parseInt(br.readLine()));
         return student;
     }
     public void displayStudents(List<Student> students) {
