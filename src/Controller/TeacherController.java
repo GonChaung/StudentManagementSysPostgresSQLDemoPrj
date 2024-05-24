@@ -28,21 +28,22 @@ public class TeacherController {
         System.out.println();
 
         int choice = Integer.parseInt(DataUtil.br.readLine());
-
+        Teacher teacher = null;
         switch (choice) {
             case 1:
-                Teacher teacherForRegistration = this.teacherDataPrepare.prepareTeacherForRegistration();
-                this.teacherService.insertTeacher(teacherForRegistration);
+                teacher = this.teacherDataPrepare.prepareTeacherForRegistration();
+                this.teacherService.insertTeacher(teacher);
                 break;
 
             case 2:
-                Teacher teacherSearch = this.teacherDataPrepare.prepareTeacherForSearch();
-                this.teacherService.searchTeacher(teacherSearch);
+                teacher = this.teacherDataPrepare.prepareTeacherForSearch();
+                teacher = this.teacherService.searchTeacher(teacher);
+                this.teacherDataPrepare.searchTeacher(teacher);
                 break;
 
             case 3:
-                Teacher teacherDelete = this.teacherDataPrepare.prepareTeacherForDelete();
-                this.teacherService.deleteTeacher(teacherDelete);
+                teacher = this.teacherDataPrepare.prepareTeacherForDelete();
+                this.teacherService.deleteTeacher(teacher);
                 break;
 
             case 4:
@@ -51,8 +52,8 @@ public class TeacherController {
                 break;
 
             case 5:
-                Teacher teacherUpdate = this.teacherDataPrepare.prepareTeacherForUpdate();
-                this.teacherService.updateTeacher(teacherUpdate);
+                teacher = this.teacherDataPrepare.prepareTeacherForUpdate();
+                this.teacherService.updateTeacher(teacher);
                 break;
 
             default:

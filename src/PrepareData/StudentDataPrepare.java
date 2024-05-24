@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class StudentDataPrepare {
+public class StudentDataPrepare extends PersonDataPrepare{
     BufferedReader br = DataUtil.br;
     private DepartmentDao departmentDao;
 
@@ -19,13 +19,9 @@ public class StudentDataPrepare {
     }
 
     public Student prepareStudentForRegistration() throws IOException, SQLException {
+
         Student student = new Student();
-        System.out.println("Name : " ) ;
-        student.setName(br.readLine());
-        System.out.println("Phone : ");
-        student.setPhone(br.readLine());
-        System.out.println("Email : ");
-        student.setEmail(br.readLine());
+        student=(Student) preparePersonDataForRegistration(student);
         System.out.println("Select Department : ");
         for(Department department:this.departmentDao.getAllDepartments()){
             System.out.println("ID "+department.getId()+"::"+department.getName());
@@ -42,17 +38,26 @@ public class StudentDataPrepare {
         student.setId(Integer.parseInt(br.readLine()));
         return student;
     }
-    public Student prepareStudentForUpdate() throws IOException {
+
+    public void searchStudent(Student student) throws IOException {
+        if(student != null) {
+            System.out.println("student ID : " + student.getId());
+            System.out.println("student Name : " + student.getName());
+            System.out.println("student Email : " + student.getEmail());
+            System.out.println("student Phone : " + student.getPhone());
+            System.out.println("student Department : " + student.getDepartment().getName());
+            System.out.println("student Age : " + student.getAge());
+            System.out.println("student Gender : " + student.getGender());
+        }else System.out.println("There is no student with ID " + student.getId());
+    }
+    public Student prepareStudentForUpdate() throws IOException, SQLException {
         Student student = new Student();
-        System.out.println("Type student ID : ");
-        student.setId(Integer.parseInt(br.readLine()));
-        System.out.println("Type student name : ");
-        student.setName( br.readLine());
-        System.out.println("Type student phone : ");
-        student.setPhone( br.readLine());
-        System.out.println("Type student email : ");
-        student.setEmail(br.readLine());
-        System.out.println("Type student department : ");
+        student = (Student) preparePersonDataForUpdate(student);
+        System.out.println("Select Department : ");
+        for(Department department:this.departmentDao.getAllDepartments()){
+            System.out.println("ID "+department.getId()+"::"+department.getName());
+        }
+        System.out.println("Enter Department ID: ");
         Department department = new Department();
         department.setId(Integer.parseInt(br.readLine()));
         student.setDepartment(department);
@@ -71,7 +76,11 @@ public class StudentDataPrepare {
                     "/ name " + student.getName() +
                     "/ phone " + student.getPhone() +
                     "/ department " + student.getDepartment().getName() +
-                    "/ email " + student.getEmail());
+                    "/ email " + student.getEmail() +
+                    "/ age " + student.getAge() +
+                    "/ gender " + student.getGender()
+            );
+
         }
     }
 }

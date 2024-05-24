@@ -38,8 +38,9 @@ public class EmployeeController {
                 break;
 
             case 2:
-                 employee = this.employeeDataPrepare.prepareEmployeeForSearch();
-                this.employeeService.searchEmployee(employee);
+                employee = this.employeeDataPrepare.prepareEmployeeForSearch();
+                employee = this.employeeService.searchEmployee(employee);
+                this.employeeDataPrepare.searchEmployee(employee);
                 break;
 
             case 3:

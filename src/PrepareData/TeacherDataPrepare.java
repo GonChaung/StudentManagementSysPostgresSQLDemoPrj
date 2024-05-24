@@ -2,7 +2,6 @@ package PrepareData;
 
 import Dao.DepartmentDao;
 import Model.Department;
-import Model.Student;
 import Model.Teacher;
 import Utils.DataUtil;
 
@@ -11,7 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class TeacherDataPrepare {
+public class TeacherDataPrepare extends PersonDataPrepare {
     BufferedReader br = DataUtil.br;
     private DepartmentDao departmentDao;
 
@@ -26,10 +25,23 @@ public class TeacherDataPrepare {
         return teacher;
     }
 
+    public void searchTeacher(Teacher teacher) throws IOException {
+        if (teacher != null) {
+            System.out.println("Teacher found successfully.");
+            System.out.println("Teacher ID: " + teacher.getId());
+            System.out.println("Teacher Name: " + teacher.getName());
+            System.out.println("Teacher Department: " + teacher.getDepartment().getName());
+            System.out.println("Teacher Course: " + teacher.getCourse());
+            System.out.println("Teacher Salary: " + teacher.getSalary());
+            System.out.println("Teacher Email: " + teacher.getEmail());
+        } else {
+            System.out.println("Failed to find teacher.");
+        }
+    }
+
     public Teacher prepareTeacherForRegistration() throws IOException, SQLException {
         Teacher teacher = new Teacher();
-        System.out.println("Enter Teacher Name: ");
-        teacher.setName(br.readLine());
+        teacher = (Teacher) preparePersonDataForRegistration(teacher);
         System.out.println("Select Department : ");
         for(Department department:this.departmentDao.getAllDepartments()){
             System.out.println("ID"+department.getId()+"::"+department.getName());
@@ -42,32 +54,14 @@ public class TeacherDataPrepare {
         teacher.setCourse(br.readLine());
         System.out.println("Enter Teacher Salary: ");
         teacher.setSalary(Long.parseLong(br.readLine()));
-        System.out.println("Enter Teacher Email: ");
-        teacher.setEmail(br.readLine());
-        System.out.println("Enter Teacher Age : ");
-        teacher.setAge(br.readLine());
-        System.out.println("Enter Teacher Gender : ");
-        teacher.setGender(br.readLine());
-
         return teacher;
     }
 
     public Teacher prepareTeacherForUpdate() throws IOException, SQLException {
         Teacher teacher = new Teacher();
-        System.out.println("Type teacher ID : ");
-        teacher.setId(Integer.parseInt(br.readLine()));
-        System.out.println("Type teacher name : ");
-        teacher.setName( br.readLine());
-        System.out.println("Type teacher phone : ");
-        teacher.setPhone( br.readLine());
+        teacher = (Teacher) preparePersonDataForUpdate(teacher);
         System.out.println("Type teacher course : ");
         teacher.setCourse(br.readLine());
-        System.out.println("Type teacher email : ");
-        teacher.setEmail(br.readLine());
-        System.out.println("Enter teacher age : ");
-        teacher.setAge(br.readLine());
-        System.out.println("Enter teacher gender : ");
-        teacher.setGender(br.readLine());
         System.out.println("Enter Teacher Salary: ");
         teacher.setSalary(Long.parseLong(br.readLine()));
         System.out.println("Select Department : ");
@@ -87,7 +81,11 @@ public class TeacherDataPrepare {
                     "/ name " + teacher.getName() +
                     "/ phone " + teacher.getPhone() +
                     "/ department " + teacher.getDepartment().getName() +
-                    "/ email " + teacher.getEmail());
+                    "/ email " + teacher.getEmail() +
+                    "/ salary " + teacher.getSalary() +
+                    "/ course " + teacher.getCourse() +
+                    "/ age " + teacher.getAge() +
+                    "/ gender " + teacher.getGender());
         }
     }
 

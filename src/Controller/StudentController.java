@@ -27,21 +27,22 @@ public class StudentController {
         System.out.println();
 
         int choice = Integer.parseInt(DataUtil.br.readLine());
-
+        Student student = null;
         switch (choice) {
             case 1:
-                Student studentRegistration = this.studentDataPrepare.prepareStudentForRegistration();
-                this.studentService.insertStudent(studentRegistration);
+                student = this.studentDataPrepare.prepareStudentForRegistration();
+                this.studentService.insertStudent(student);
                 break;
 
             case 2:
-                Student student = this.studentDataPrepare.prepareStudentForSearch();
-                this.studentService.searchStudent(student);
+                student = this.studentDataPrepare.prepareStudentForSearch();
+                student=this.studentService.searchStudent(student);
+                this.studentDataPrepare.searchStudent(student);
                 break;
 
             case 3:
-                Student studentDelete = this.studentDataPrepare.prepareStudentForDelete();
-                this.studentService.deleteStudent(studentDelete);
+                student = this.studentDataPrepare.prepareStudentForDelete();
+                this.studentService.deleteStudent(student);
                 break;
 
             case 4:
@@ -50,8 +51,8 @@ public class StudentController {
                 break;
 
             case 5:
-                Student studentUpdate = this.studentDataPrepare.prepareStudentForUpdate();
-                this.studentService.updateStudent(studentUpdate);
+                student = this.studentDataPrepare.prepareStudentForUpdate();
+                this.studentService.updateStudent(student);
                 break;
 
             default:

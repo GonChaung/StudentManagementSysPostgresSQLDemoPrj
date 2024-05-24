@@ -1,4 +1,5 @@
-package DB_test;
+package Registration_App;
+
 import Controller.EmployeeController;
 import Controller.StudentController;
 import Controller.TeacherController;

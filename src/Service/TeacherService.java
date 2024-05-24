@@ -39,19 +39,9 @@ public class TeacherService {
         }
     }
 
-    public void searchTeacher(Teacher teacher) throws IOException {
+    public Teacher searchTeacher(Teacher teacher) throws IOException {
         Teacher foundTeacher = this.teacherDao.searchTeacher(teacher);
-        if (foundTeacher != null) {
-            System.out.println("Teacher found successfully.");
-            System.out.println("Teacher ID: " + foundTeacher.getId());
-            System.out.println("Teacher Name: " + foundTeacher.getName());
-            System.out.println("Teacher Department: " + foundTeacher.getDepartment());
-            System.out.println("Teacher Course: " + foundTeacher.getCourse());
-            System.out.println("Teacher Salary: " + foundTeacher.getSalary());
-            System.out.println("Teacher Email: " + foundTeacher.getEmail());
-        } else {
-            System.out.println("Failed to find teacher.");
-        }
+        return foundTeacher;
     }
 
     public List<Teacher> getAllTeacher() throws SQLException, IOException {

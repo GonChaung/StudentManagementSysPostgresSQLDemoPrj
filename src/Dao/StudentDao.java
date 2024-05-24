@@ -84,9 +84,8 @@ public class StudentDao {
             int rowsAffected = pstmt.executeUpdate();
             if(rowsAffected > 0){
                 return student;
-                //System.out.println(" Student " + student.getStudent_id() + " deleted successfully");
             }
-            else return null; //System.out.println(" Failed to delete student.");
+            else return null;
     } catch (SQLException e) {
             throw new RuntimeException(e);}
     }

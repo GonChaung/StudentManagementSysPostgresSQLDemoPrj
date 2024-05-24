@@ -1,6 +1,5 @@
 package PrepareData;
 
-import Dao.EmployeeDao;
 import Dao.EmployeeTypeDao;
 import Model.Employee;
 import Model.EmployeeType;
@@ -11,7 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class EmployeeDataPrepare {
+public class EmployeeDataPrepare extends PersonDataPrepare{
     BufferedReader br = DataUtil.br;
     private EmployeeTypeDao employeeTypeDao;
 
@@ -21,10 +20,7 @@ public class EmployeeDataPrepare {
 
     public Employee prepareEmployeeForRegisteration() throws IOException, SQLException {
         Employee employee = new Employee();
-        System.out.println("Name : ");
-        employee.setName(br.readLine());
-        System.out.println("Phone : ");
-        employee.setPhone(br.readLine());
+        employee = (Employee) preparePersonDataForRegistration(employee);
         System.out.println(" Select employeeType : ");
         for(EmployeeType employeeType : this.employeeTypeDao.getAllEmployeeTypeID()){
             System.out.println("ID : " + employeeType.getId() + " Name : " + employeeType.getName());
@@ -40,12 +36,7 @@ public class EmployeeDataPrepare {
 
     public Employee prepareEmployeeUpdate() throws IOException, SQLException {
         Employee employee = new Employee();
-        System.out.println("Type employee ID : ");
-        employee.setId(Integer.parseInt(br.readLine()));
-        System.out.println("Type employee name : ");
-        employee.setName(br.readLine());
-        System.out.println("Type employee phone : ");
-        employee.setPhone(br.readLine());
+        employee = (Employee) preparePersonDataForUpdate(employee);
         System.out.println(" Select employeeType : ");
         for(EmployeeType employeeType : this.employeeTypeDao.getAllEmployeeTypeID()){
             System.out.println("ID : " + employeeType.getId() + " Name : " + employeeType.getName());
@@ -65,7 +56,9 @@ public class EmployeeDataPrepare {
                     "/ name " + employee.getName() +
                     "/ phone " + employee.getPhone() +
                     "/ serviceID " + employee.getEmployeeType().getName() +
-                    "/ salary " + employee.getSalary());
+                    "/ salary " + employee.getSalary() +
+                    "/ age " + employee.getAge() +
+                    "/ gender " + employee.getGender());
         }
     }
 
@@ -74,6 +67,18 @@ public class EmployeeDataPrepare {
         System.out.println("Type employee ID : ");
         employee.setId(Integer.parseInt(br.readLine()));
         return employee;
+    }
+
+    public void searchEmployee(Employee employee){
+        if (employee != null) {
+            System.out.println("employee ID :" + employee.getId());
+            System.out.println("employee Name :" + employee.getName());
+            System.out.println("employee Phone :" + employee.getPhone());
+            System.out.println("employee Department : " + employee.getEmployeeType().getName());
+            System.out.println("employee Salary : " + employee.getSalary());
+        } else {
+            System.out.println("There is no employee with ID " + employee.getId());
+        }
     }
 
     public Employee prepareEmployeeForDelete() throws IOException {

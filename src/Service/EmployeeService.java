@@ -17,17 +17,9 @@ public class EmployeeService {
         this.employeeDao = new EmployeeDao();
     }
 
-    public void searchEmployee(Employee employee) throws IOException {
+    public Employee searchEmployee(Employee employee) throws IOException {
         Employee searchEmployee = this.employeeDao.searchEmployee(employee);
-        if (searchEmployee != null) {
-            System.out.println("employee ID :" + searchEmployee.getId());
-            System.out.println("employee Name :" + searchEmployee.getName());
-            System.out.println("employee Phone :" + searchEmployee.getPhone());
-            System.out.println("employee Department : " + searchEmployee.getEmployeeType().getName());
-            System.out.println("employee Salary : " + searchEmployee.getSalary());
-        } else {
-            System.out.println("There is no employee with ID " + employee.getId());
-        }
+        return searchEmployee;
     }
 
     public void insertEmployee(Employee employee) throws IOException, SQLException {

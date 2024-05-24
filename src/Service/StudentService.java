@@ -2,10 +2,8 @@ package Service;
 
 import Dao.StudentDao;
 import Model.Student;
-import PrepareData.StudentDataPrepare;
 import Utils.DataUtil;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.sql.*;
 import java.util.List;
 
@@ -15,15 +13,9 @@ public class StudentService {
     public StudentService() {
      this.studentDao = new StudentDao();
     }
-    public void searchStudent(Student student){
+    public Student searchStudent(Student student){
         Student searchStudent = this.studentDao.searchStudent(student);
-        if(searchStudent != null) {
-            System.out.println("student ID :" + searchStudent.getId());
-            System.out.println("student Name :" + searchStudent.getName());
-            System.out.println("student Email :" + searchStudent.getEmail());
-            System.out.println("student Phone :" + searchStudent.getPhone());
-            System.out.println("student Department : " + searchStudent.getDepartment().getName());
-        }else System.out.println("There is no student with ID " + student.getId());
+        return searchStudent;
     }
     public void insertStudent(Student student) {
         Student insertedStudent = this.studentDao.insertStudent(student);
@@ -31,7 +23,7 @@ public class StudentService {
             System.out.println(" New Student Added Successfully");
         }
     }
-    public void deleteStudent(Student student) throws IOException {
+    public void deleteStudent(Student student) {
         Student deletedStudent = this.studentDao.deleteStudent(student);
         if(deletedStudent != null) {
             System.out.println(" Student " + student.getId() + " deleted successfully");
@@ -41,7 +33,7 @@ public class StudentService {
        List<Student> students = this.studentDao.getAllStudents();
        return students;
     }
-    public void updateStudent(Student student) throws IOException {
+    public void updateStudent(Student student)  {
         Student updatedStudent=this.studentDao.studentUpdate(student);
         if(updatedStudent!=null){
                 System.out.println(" Student " + updatedStudent.getName() + '(' + updatedStudent.getId() + ')' + " updated successfully");
