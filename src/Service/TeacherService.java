@@ -1,7 +1,6 @@
 package Service;
 
 import Dao.TeacherDao;
-import Model.Student;
 import Model.Teacher;
 import Utils.DataUtil;
 import java.io.BufferedReader;
@@ -31,10 +30,7 @@ public class TeacherService {
         }
     }
 
-    public void deleteTeacher() throws IOException {
-        Teacher teacher = new Teacher();
-        System.out.println("Enter Teacher ID: ");
-        teacher.setId(Integer.parseInt(br.readLine()));
+    public void deleteTeacher(Teacher teacher) throws IOException {
         Teacher deletedTeacher = this.teacherDao.deleteTeacher(teacher);
         if (deletedTeacher != null) {
             System.out.println("Teacher deleted successfully.");
@@ -43,11 +39,7 @@ public class TeacherService {
         }
     }
 
-    public void searchTeacher() throws IOException {
-        Teacher teacher = new Teacher();
-        System.out.println("Enter Teacher ID: ");
-        teacher.setId(Integer.parseInt(br.readLine()));
-
+    public void searchTeacher(Teacher teacher) throws IOException {
         Teacher foundTeacher = this.teacherDao.searchTeacher(teacher);
         if (foundTeacher != null) {
             System.out.println("Teacher found successfully.");

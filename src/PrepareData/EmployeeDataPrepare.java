@@ -38,7 +38,7 @@ public class EmployeeDataPrepare {
         return employee;
     }
 
-    public Employee prepareEmployeeUpdate() throws IOException {
+    public Employee prepareEmployeeUpdate() throws IOException, SQLException {
         Employee employee = new Employee();
         System.out.println("Type employee ID : ");
         employee.setId(Integer.parseInt(br.readLine()));
@@ -46,7 +46,11 @@ public class EmployeeDataPrepare {
         employee.setName(br.readLine());
         System.out.println("Type employee phone : ");
         employee.setPhone(br.readLine());
-        System.out.println("Type employee service : ");
+        System.out.println(" Select employeeType : ");
+        for(EmployeeType employeeType : this.employeeTypeDao.getAllEmployeeTypeID()){
+            System.out.println("ID : " + employeeType.getId() + " Name : " + employeeType.getName());
+        }
+        System.out.println(" Enter Employee ID : ");
         EmployeeType employeeType = new EmployeeType();
         employeeType.setId(Integer.parseInt(br.readLine()));
         employee.setEmployeeTypeID(employeeType);
@@ -63,5 +67,19 @@ public class EmployeeDataPrepare {
                     "/ serviceID " + employee.getEmployeeType().getName() +
                     "/ salary " + employee.getSalary());
         }
+    }
+
+    public Employee prepareEmployeeForSearch() throws IOException{
+        Employee employee = new Employee();
+        System.out.println("Type employee ID : ");
+        employee.setId(Integer.parseInt(br.readLine()));
+        return employee;
+    }
+
+    public Employee prepareEmployeeForDelete() throws IOException {
+        Employee employee = new Employee();
+        System.out.println("Type your employee id : ");
+        employee.setId(Integer.parseInt(br.readLine()));
+        return employee;
     }
 }

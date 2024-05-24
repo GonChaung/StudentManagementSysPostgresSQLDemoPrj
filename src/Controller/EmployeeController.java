@@ -30,19 +30,21 @@ public class EmployeeController {
         System.out.println();
 
         int choice = Integer.parseInt(DataUtil.br.readLine());
-
+        Employee employee = null;
         switch (choice) {
             case 1:
-                Employee employeeRegistration = this.employeeDataPrepare.prepareEmployeeForRegisteration();
-                this.employeeService.insertEmployee(employeeRegistration);
+                employee = this.employeeDataPrepare.prepareEmployeeForRegisteration();
+                this.employeeService.insertEmployee(employee);
                 break;
 
             case 2:
-                this.employeeService.searchEmployee();
+                 employee = this.employeeDataPrepare.prepareEmployeeForSearch();
+                this.employeeService.searchEmployee(employee);
                 break;
 
             case 3:
-                this.employeeService.deleteEmployee();
+                employee = this.employeeDataPrepare.prepareEmployeeForDelete();
+                this.employeeService.deleteEmployee(employee);
                 break;
 
             case 4:

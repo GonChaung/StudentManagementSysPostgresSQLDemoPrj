@@ -21,7 +21,8 @@ public class EmployeeDao {
         try (PreparedStatement pstmt = con.prepareStatement(updateSQL)) {
             pstmt.setString(1, employee.getName());
             pstmt.setString(2, employee.getPhone());
-            pstmt.setString(3, employee.getEmployeeType().getName());
+            System.out.println(employee.getEmployeeType().getId());
+            pstmt.setInt(3, employee.getEmployeeType().getId());
             pstmt.setDouble(4, employee.getSalary());
             pstmt.setString(5,employee.getAge());
             pstmt.setString(6, employee.getGender());
@@ -45,7 +46,6 @@ public class EmployeeDao {
             pstmt.setDouble(2, employee.getSalary());
             pstmt.setString(4, employee.getAge());
             pstmt.setString(5, employee.getGender());
-            System.out.println(employee.getEmployeeType().getId());
             pstmt.setInt(6, employee.getEmployeeType().getId());
             int rowAffected = pstmt.executeUpdate();
             if (rowAffected > 0) {

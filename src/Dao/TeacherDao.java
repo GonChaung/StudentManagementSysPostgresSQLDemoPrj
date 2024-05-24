@@ -72,7 +72,7 @@ public class TeacherDao {
             pstmt.setInt(1, teacher.getId());
             try(ResultSet rs = pstmt.executeQuery()){
                 if(rs.next()){
-                    teacher.setId(rs.getInt("teacher_id"));
+                    teacher.setId(rs.getInt("id"));
                     teacher.setName(rs.getString("name"));
                     teacher.setDepartment(this.departmentDao.searchDepartmentById(rs.getInt("department_id")));
                     teacher.setCourse(rs.getString("course"));

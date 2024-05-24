@@ -36,11 +36,13 @@ public class TeacherController {
                 break;
 
             case 2:
-                this.teacherService.searchTeacher();
+                Teacher teacherSearch = this.teacherDataPrepare.prepareTeacherForSearch();
+                this.teacherService.searchTeacher(teacherSearch);
                 break;
 
             case 3:
-                this.teacherService.deleteTeacher();
+                Teacher teacherDelete = this.teacherDataPrepare.prepareTeacherForDelete();
+                this.teacherService.deleteTeacher(teacherDelete);
                 break;
 
             case 4:

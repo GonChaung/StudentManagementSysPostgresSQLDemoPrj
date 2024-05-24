@@ -15,8 +15,15 @@ public class StudentService {
     public StudentService() {
      this.studentDao = new StudentDao();
     }
-    public void searchStudent(Student student) throws IOException, SQLException {
-        StudentDataPrepare studentDataPrepare = new StudentDataPrepare();
+    public void searchStudent(Student student){
+        Student searchStudent = this.studentDao.searchStudent(student);
+        if(searchStudent != null) {
+            System.out.println("student ID :" + searchStudent.getId());
+            System.out.println("student Name :" + searchStudent.getName());
+            System.out.println("student Email :" + searchStudent.getEmail());
+            System.out.println("student Phone :" + searchStudent.getPhone());
+            System.out.println("student Department : " + searchStudent.getDepartment().getName());
+        }else System.out.println("There is no student with ID " + student.getId());
     }
     public void insertStudent(Student student) {
         Student insertedStudent = this.studentDao.insertStudent(student);

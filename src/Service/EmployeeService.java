@@ -17,10 +17,7 @@ public class EmployeeService {
         this.employeeDao = new EmployeeDao();
     }
 
-    public void searchEmployee() throws IOException {
-        Employee employee = new Employee();
-        System.out.println("Type employee ID : ");
-        employee.setId(Integer.parseInt(br.readLine()));
+    public void searchEmployee(Employee employee) throws IOException {
         Employee searchEmployee = this.employeeDao.searchEmployee(employee);
         if (searchEmployee != null) {
             System.out.println("employee ID :" + searchEmployee.getId());
@@ -40,10 +37,7 @@ public class EmployeeService {
         }
     }
 
-    public void deleteEmployee() throws IOException {
-        Employee employee = new Employee();
-        System.out.println("Type your employee id : ");
-        employee.setId(Integer.parseInt(br.readLine()));
+    public void deleteEmployee(Employee employee) throws IOException {
         Employee deletedEmployee = this.employeeDao.deleteEmployee(employee);
         if (deletedEmployee != null) {
             System.out.println("Employee " + employee.getId() + " deleted successfully");

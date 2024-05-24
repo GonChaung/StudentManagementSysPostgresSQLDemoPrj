@@ -28,11 +28,11 @@ public class StudentDao {
             if (rowsAffected > 0) {
                 return student;
             } else return null;
-//            System.out.println(" Failed to update student.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
     public Student insertStudent(Student student) {
         String insertSQL = "INSERT INTO students (name, phone, email, department_id,age,gender) VALUES (?,?,?,?,?,?)";
         try(PreparedStatement pstmt = con.prepareStatement(insertSQL)){
@@ -50,6 +50,7 @@ public class StudentDao {
             throw new RuntimeException(e);
         }
     }
+
     public Student searchStudent(Student student) {
         String searchSQL = "SELECT * FROM students WHERE id = ?";
         try(PreparedStatement pstmt = con.prepareStatement(searchSQL)){
@@ -75,6 +76,7 @@ public class StudentDao {
             throw new RuntimeException(e);
         }
     }
+
     public Student deleteStudent(Student student) {
         String deleteSQL = "DELETE FROM students WHERE id = ?";
         try(PreparedStatement pstmt = con.prepareStatement(deleteSQL)){
@@ -88,6 +90,7 @@ public class StudentDao {
     } catch (SQLException e) {
             throw new RuntimeException(e);}
     }
+
     public List<Student> getAllStudents() throws SQLException {
         List<Student> students = new ArrayList<>();
         String searchSQL = "SELECT * FROM students";

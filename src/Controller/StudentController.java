@@ -35,8 +35,8 @@ public class StudentController {
                 break;
 
             case 2:
-                Student studentSearch = this.studentDataPrepare.prepareStudentForSearch();
-                this.studentService.searchStudent(studentSearch);
+                Student student = this.studentDataPrepare.prepareStudentForSearch();
+                this.studentService.searchStudent(student);
                 break;
 
             case 3:
