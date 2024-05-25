@@ -26,16 +26,13 @@ public class PersonDataPrepare {
     public Person preparePersonDataForUpdate(Person person) throws IOException, SQLException {
         System.out.println("Type ID : ");
         person.setId(Integer.parseInt(br.readLine()));
-        System.out.println("Type name : ");
-        person.setName( br.readLine());
-        System.out.println("Type phone : ");
-        person.setPhone( br.readLine());
-        System.out.println("Type email : ");
-        person.setEmail(br.readLine());
-        System.out.println("Age : ");
-        person.setAge(br.readLine());
-        System.out.println("Gender : ");
-        person.setGender(br.readLine());
+        person=preparePersonDataForRegistration(person);
+        return person;
+    }
+
+    public Person preparePersonDataForDelete(Person person) throws IOException, SQLException {
+        System.out.println("Type id : ");
+        person.setId(Integer.parseInt(br.readLine()));
         return person;
     }
 }

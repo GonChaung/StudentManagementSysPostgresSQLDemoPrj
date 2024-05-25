@@ -32,6 +32,7 @@ public class StudentDataPrepare extends PersonDataPrepare{
         student.setDepartment(department);
         return student;
     }
+
     public Student prepareStudentForSearch() throws IOException {
         Student student = new Student();
         System.out.println("Type student ID : ");
@@ -50,6 +51,7 @@ public class StudentDataPrepare extends PersonDataPrepare{
             System.out.println("student Gender : " + student.getGender());
         }else System.out.println("There is no student with ID " + student.getId());
     }
+
     public Student prepareStudentForUpdate() throws IOException, SQLException {
         Student student = new Student();
         student = (Student) preparePersonDataForUpdate(student);
@@ -64,12 +66,12 @@ public class StudentDataPrepare extends PersonDataPrepare{
         return student;
     }
 
-    public Student prepareStudentForDelete() throws IOException {
+    public Student prepareStudentForDelete() throws IOException, SQLException {
         Student student = new Student();
-        System.out.println(" Type your student id : ");
-        student.setId(Integer.parseInt(br.readLine()));
+        student = (Student) preparePersonDataForDelete(student);
         return student;
     }
+
     public void displayStudents(List<Student> students) {
         for(Student student : students){
             System.out.println(" student id "+ student.getId() +

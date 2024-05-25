@@ -25,7 +25,7 @@ public class DepartmentDao {
     }
     public Department searchDepartmentById(int departmentId){
         Department department = null;
-        String searchSQL = "SELECT  * FROM departments WHERE id = ?";
+        String searchSQL = "SELECT * FROM departments WHERE id = ?";
         try(PreparedStatement pstmt = con.prepareStatement(searchSQL)){
             pstmt.setInt(1, departmentId);
             ResultSet rs = pstmt.executeQuery();

@@ -81,10 +81,9 @@ public class EmployeeDataPrepare extends PersonDataPrepare{
         }
     }
 
-    public Employee prepareEmployeeForDelete() throws IOException {
+    public Employee prepareEmployeeForDelete() throws IOException, SQLException {
         Employee employee = new Employee();
-        System.out.println("Type your employee id : ");
-        employee.setId(Integer.parseInt(br.readLine()));
+        employee = (Employee) preparePersonDataForDelete(employee);
         return employee;
     }
 }

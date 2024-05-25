@@ -25,7 +25,7 @@ public class TeacherDataPrepare extends PersonDataPrepare {
         return teacher;
     }
 
-    public void searchTeacher(Teacher teacher) throws IOException {
+    public void searchTeacher(Teacher teacher)  {
         if (teacher != null) {
             System.out.println("Teacher found successfully.");
             System.out.println("Teacher ID: " + teacher.getId());
@@ -89,10 +89,9 @@ public class TeacherDataPrepare extends PersonDataPrepare {
         }
     }
 
-    public Teacher prepareTeacherForDelete() throws IOException {
+    public Teacher prepareTeacherForDelete() throws IOException, SQLException {
         Teacher teacher = new Teacher();
-        System.out.println("Enter Teacher ID: ");
-        teacher.setId(Integer.parseInt(br.readLine()));
+        teacher = (Teacher) preparePersonDataForDelete(teacher);
         return teacher;
     }
 }
