@@ -82,7 +82,17 @@ public class StudentDataPrepare extends PersonDataPrepare{
                     "/ age " + student.getAge() +
                     "/ gender " + student.getGender()
             );
+        }
+    }
 
+    public void displayStudentByDepartment(List<Student> students, int id) {
+        if( students.isEmpty()){
+            System.out.println("There is no student with ID " + id);
+        }else{
+            System.out.println("Student for Department ID " + id + ":");
+            for(Student student : students){
+                System.out.println("ID "+student.getId()+":: Name = "+student.getName());
+            }
         }
     }
 }

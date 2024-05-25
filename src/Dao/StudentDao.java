@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDao {
-    Connection con= DatabaseUtil.getConnection();
+    Connection con = DatabaseUtil.getConnection();
     private DepartmentDao departmentDao;
     public StudentDao() {
        this.departmentDao=new DepartmentDao();
@@ -109,4 +109,33 @@ public class StudentDao {
         }
         return students;
     }
+
+    public List<Student> getStudentByDepartment(int id) throws SQLException {
+        List<Student> students = new ArrayList<>();
+        Department department = departmentDao.searchDepartmentById(id);
+        if (department == null) {
+            return students;
+        }
+        String searchSQL = "SELECT * FROM students WHERE department_id = ?";
+        try (PreparedStatement pstmt = con.prepareStatement(searchSQL)) {
+            pstmt.setInt(1, id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Student student = new Student();
+                    student.setId(rs.getInt("id"));
+                    student.setName(rs.getString("name"));
+                    student.setPhone(rs.getString("phone"));
+                    student.setEmail(rs.getString("email"));
+                    student.setAge(rs.getString("age"));
+                    student.setGender(rs.getString("gender"));
+                    student.setDepartment(department);
+                    students.add(student);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return students;
+    }
+
 }

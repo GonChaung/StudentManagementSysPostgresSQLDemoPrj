@@ -1,22 +1,19 @@
 package Controller;
 
 import Model.Employee;
-import Model.Student;
 import PrepareData.EmployeeDataPrepare;
-import PrepareData.StudentDataPrepare;
-import Service.EmployeeService;
-import Service.StudentService;
+import Service.Impl.EmployeeServiceImpl;
 import Utils.DataUtil;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class EmployeeController {
-    private EmployeeService employeeService;
+    private EmployeeServiceImpl employeeService;
     private EmployeeDataPrepare employeeDataPrepare;
 
     public EmployeeController() {
-        this.employeeService = new EmployeeService();
+        this.employeeService = new EmployeeServiceImpl();
         this.employeeDataPrepare = new EmployeeDataPrepare();
     }
 
@@ -34,18 +31,26 @@ public class EmployeeController {
         switch (choice) {
             case 1:
                 employee = this.employeeDataPrepare.prepareEmployeeForRegisteration();
-                this.employeeService.insertEmployee(employee);
+                this.employeeService.insert(employee);
+                if (employee != null) {
+                    System.out.println("New Employee Added Successfully");
+                }
                 break;
 
             case 2:
                 employee = this.employeeDataPrepare.prepareEmployeeForSearch();
-                employee = this.employeeService.searchEmployee(employee);
+                employee = this.employeeService.search(employee);
                 this.employeeDataPrepare.searchEmployee(employee);
                 break;
 
             case 3:
                 employee = this.employeeDataPrepare.prepareEmployeeForDelete();
-                this.employeeService.deleteEmployee(employee);
+                this.employeeService.delete(employee);
+                if (employee != null) {
+                    System.out.println("Employee " + employee.getId() + " deleted successfully");
+                } else {
+                    System.out.println("There is no employee with ID " + employee.getId());
+                }
                 break;
 
             case 4:
@@ -54,8 +59,11 @@ public class EmployeeController {
                 break;
 
             case 5:
-                Employee employeeUpdate = this.employeeDataPrepare.prepareEmployeeUpdate();
-                this.employeeService.updateEmployee(employeeUpdate);
+                employee = this.employeeDataPrepare.prepareEmployeeUpdate();
+                this.employeeService.update(employee);
+                if (employee != null) {
+                    System.out.println("Employee " + employee.getName() + '(' + employee.getId() + ')' + " updated successfully");
+                }
                 break;
 
             default:

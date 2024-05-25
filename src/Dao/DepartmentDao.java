@@ -1,6 +1,6 @@
 package Dao;
 
-import Model.Department;
+import Model.*;
 import Utils.DatabaseUtil;
 import java.sql.PreparedStatement;
 import java.sql.*;
@@ -55,5 +55,17 @@ public class DepartmentDao {
             departments.add(department);
         }
         return departments;
+    }
+    public List<Person> getAllPersonByDepartmentId() throws SQLException {
+        List<Person> persons = new ArrayList<>();
+        String searchSQL = "SELECT * FROM departments";
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(searchSQL);
+        while(rs.next()){
+            Person person = new Person();
+            person.setId(rs.getInt("id "));
+            person.setName(rs.getString("name "));
+        }
+        return persons;
     }
 }

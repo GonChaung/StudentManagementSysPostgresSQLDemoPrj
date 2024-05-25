@@ -1,19 +1,20 @@
 package Controller;
 
+import Model.Department;
 import Model.Student;
 import PrepareData.StudentDataPrepare;
-import Service.StudentService;
+import Service.Impl.StudentServiceImpl;
 import Utils.DataUtil;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class StudentController {
-    private StudentService studentService;
+    private StudentServiceImpl studentService;
     private StudentDataPrepare studentDataPrepare;
 
     public StudentController() {
-        this.studentService = new StudentService();
+        this.studentService = new StudentServiceImpl();
         this.studentDataPrepare = new StudentDataPrepare();
     }
 
@@ -24,6 +25,7 @@ public class StudentController {
         System.out.println("3. Delete Student");
         System.out.println("4. Get all student data");
         System.out.println("5. Update Student Data");
+        System.out.println("6. Search Student by department");
         System.out.println();
 
         int choice = Integer.parseInt(DataUtil.br.readLine());
@@ -31,18 +33,24 @@ public class StudentController {
         switch (choice) {
             case 1:
                 student = this.studentDataPrepare.prepareStudentForRegistration();
-                this.studentService.insertStudent(student);
+                this.studentService.insert(student);
+                if(student != null) {
+                    System.out.println(" New Student Added Successfully");
+                }
                 break;
 
             case 2:
                 student = this.studentDataPrepare.prepareStudentForSearch();
-                student=this.studentService.searchStudent(student);
+                student=this.studentService.search(student);
                 this.studentDataPrepare.searchStudent(student);
                 break;
 
             case 3:
                 student = this.studentDataPrepare.prepareStudentForDelete();
-                this.studentService.deleteStudent(student);
+                this.studentService.delete(student);
+                if(student != null) {
+                    System.out.println(" Student " + student.getId() + " deleted successfully");
+                }else System.out.println("There is no student with ID " + student.getId());
                 break;
 
             case 4:
@@ -52,9 +60,17 @@ public class StudentController {
 
             case 5:
                 student = this.studentDataPrepare.prepareStudentForUpdate();
-                this.studentService.updateStudent(student);
+                this.studentService.update(student);
+                if(student!=null){
+                    System.out.println(" Student " + student.getName() + '(' + student.getId() + ')' + " updated successfully");
+                }
                 break;
-
+            case 6:
+                System.out.println("Enter Department ID: ");
+                int departmentId = Integer.parseInt(DataUtil.br.readLine());
+                List<Student> studentsByDepartment = this.studentService.searchStudentByDepartment(departmentId);
+                this.studentDataPrepare.displayStudentByDepartment(studentsByDepartment, departmentId);
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + choice);
         }
