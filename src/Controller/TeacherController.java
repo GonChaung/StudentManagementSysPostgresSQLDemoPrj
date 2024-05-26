@@ -19,11 +19,12 @@ public class TeacherController {
 
     public void teacherRegister() throws SQLException, IOException {
         System.out.println("What do you want to do?");
-        System.out.println("1. Insert Teacher");
-        System.out.println("2. Search Teacher");
-        System.out.println("3. Delete Teacher");
-        System.out.println("4. Get all Teachers data");
-        System.out.println("5. Update Teacher Data");
+        System.out.println("1. Insert Teacher : ");
+        System.out.println("2. Search Teacher : ");
+        System.out.println("3. Delete Teacher : ");
+        System.out.println("4. Get all Teachers data : " );
+        System.out.println("5. Update Teacher Data : ");
+        System.out.println("6. Search Teacher Data by Department ID : ");
         System.out.println();
 
         int choice = Integer.parseInt(DataUtil.br.readLine());
@@ -64,6 +65,13 @@ public class TeacherController {
                 if(teacher !=null){
                     System.out.println(" Student " + teacher .getName() + '(' + teacher .getId() + ')' + " updated successfully");
                 }
+                break;
+
+            case 6:
+                System.out.println("Enter Department ID: ");
+                int departmentId = Integer.parseInt(DataUtil.br.readLine());
+                List<Teacher> teachersByDepartment = this.teacherService.searchTeacherByDepartment(departmentId);
+                this.teacherDataPrepare.displayTeacherByDepartment(teachersByDepartment, departmentId);
                 break;
 
             default:

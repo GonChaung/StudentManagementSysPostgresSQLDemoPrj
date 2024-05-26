@@ -39,6 +39,17 @@ public class TeacherDataPrepare extends PersonDataPrepare {
         }
     }
 
+    public void displayTeacherByDepartment(List<Teacher> teachers, int departmentId) {
+        if(teachers.isEmpty()) {
+            System.out.println("No teacher found for department id " + departmentId);
+        }else{
+            System.out.println("Teachers for department id " + departmentId + "::");
+            for (Teacher teacher : teachers) {
+                System.out.println("Teacher ID: " + teacher.getId()+":: Name = " + teacher.getName());
+            }
+        }
+    }
+
     public Teacher prepareTeacherForRegistration() throws IOException, SQLException {
         Teacher teacher = new Teacher();
         teacher = (Teacher) preparePersonDataForRegistration(teacher);

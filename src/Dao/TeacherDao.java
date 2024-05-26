@@ -112,4 +112,33 @@ public class TeacherDao {
         }
         return teachers;
     }
+    public List<Teacher> getTeacherByDepartment(int departmentId) throws SQLException {
+        List<Teacher> teachers = new ArrayList<>();
+        Department department = departmentDao.searchDepartmentById(departmentId);
+        if (department == null) {
+            return teachers;
+        }
+
+        String searchSQL = "SELECT * FROM teachers WHERE department_id = ?";
+        try (PreparedStatement pstmt = con.prepareStatement(searchSQL)) {
+            pstmt.setInt(1, departmentId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Teacher teacher = new Teacher();
+                    teacher.setId(rs.getInt("id"));
+                    teacher.setName(rs.getString("name"));
+                    teacher.setEmail(rs.getString("email"));
+                    teacher.setAge(rs.getString("age"));
+                    teacher.setGender(rs.getString("gender"));
+                    teacher.setCourse(rs.getString("course"));
+                    teacher.setSalary(rs.getLong("salary"));
+                    teacher.setDepartment(department);
+                    teachers.add(teacher);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return teachers;
+    }
 }

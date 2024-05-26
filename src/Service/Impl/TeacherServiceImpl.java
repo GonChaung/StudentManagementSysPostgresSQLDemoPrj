@@ -40,4 +40,8 @@ public class TeacherServiceImpl implements TeacherService {
         List<Teacher> teachers = this.teacherDao.getAllTeacher();
         return teachers;
     }
+
+    public List<Teacher> searchTeacherByDepartment(int departmentId) throws SQLException {
+        return this.teacherDao.getTeacherByDepartment(departmentId);
+    }
 }
