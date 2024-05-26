@@ -81,6 +81,17 @@ public class EmployeeDataPrepare extends PersonDataPrepare{
         }
     }
 
+    public void displayEmployeeByType(List<Employee> employees, int typeId){
+        if(employees.isEmpty()){
+            System.out.println("No employee with type id " + typeId);
+        }else {
+            System.out.println("Employee for type id " + typeId + "::");
+            for (Employee employee : employees) {
+                System.out.println("employee id " + employee.getId() + ":: name " + employee.getName());
+            }
+        }
+    }
+
     public Employee prepareEmployeeForDelete() throws IOException, SQLException {
         Employee employee = new Employee();
         employee = (Employee) preparePersonDataForDelete(employee);

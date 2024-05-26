@@ -118,4 +118,33 @@ public class EmployeeDao {
         }
         return employees;
     }
+
+    public List<Employee> getEmployeesByDepartment(int typeId) throws SQLException {
+        List<Employee> employees = new ArrayList<>();
+        String searchSQL = "SELECT * FROM employees WHERE type_id = ?";
+        EmployeeType employeeType = this.employeeTypeDao.searchEmployeeTypeByID(typeId);
+         if(employeeType == null){
+             return null;
+         }else {
+             try (PreparedStatement pstmt = con.prepareStatement(searchSQL)){
+                 pstmt.setInt(1, employeeType.getId());
+                 try (ResultSet rs = pstmt.executeQuery()) {
+                     while (rs.next()) {
+                         Employee employee = new Employee();
+                         employee.setId(rs.getInt("id"));
+                         employee.setName(rs.getString("name"));
+                         employee.setPhone(rs.getString("phone"));
+                         employee.setSalary(rs.getLong("salary"));
+                         employee.setAge(rs.getString("age"));
+                         employee.setGender(rs.getString("gender"));
+                         employee.setEmployeeTypeID(employeeType);
+                         employees.add(employee);
+                     }
+                 }
+             }catch(SQLException e){
+                 throw new RuntimeException(e);
+             }
+         }
+        return employees;
+    }
 }

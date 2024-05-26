@@ -24,6 +24,7 @@ public class EmployeeController {
         System.out.println("3. Delete Employee : ");
         System.out.println("4. Get all employee data");
         System.out.println("5. Update employee Data");
+        System.out.println("6. Search Employee by ID");
         System.out.println();
 
         int choice = Integer.parseInt(DataUtil.br.readLine());
@@ -64,6 +65,13 @@ public class EmployeeController {
                 if (employee != null) {
                     System.out.println("Employee " + employee.getName() + '(' + employee.getId() + ')' + " updated successfully");
                 }
+                break;
+
+            case 6:
+                System.out.println("Enter type id : ");
+                int typeId = Integer.parseInt(DataUtil.br.readLine());
+                List<Employee> employeesByType = this.employeeService.searchEmployeeByDepartment(typeId);
+                this.employeeDataPrepare.displayEmployeeByType(employeesByType,typeId);
                 break;
 
             default:

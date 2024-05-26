@@ -44,5 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return this.employeeDao.getAllEmployees();
     }
 
-
+    public List<Employee> searchEmployeeByDepartment(int typeId) throws SQLException, IOException {
+        return this.employeeDao.getEmployeesByDepartment(typeId);
+    }
 }
