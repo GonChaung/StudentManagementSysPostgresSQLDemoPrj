@@ -20,7 +20,7 @@ public class StudentServiceImpl implements StudentService {
         return searchStudent;
     }
     public Student insert(Student student) {
-        Student insert = this.studentDao.insertStudent(student);
+        Student insert = this.studentDao.insert(student);
         return insert;
     }
     public Student delete(Student student) {
@@ -32,7 +32,7 @@ public class StudentServiceImpl implements StudentService {
        return students;
     }
     public Student update(Student student)  {
-        Student update=this.studentDao.studentUpdate(student);
+        Student update=this.studentDao.update(student);
         return update;
     }
 
