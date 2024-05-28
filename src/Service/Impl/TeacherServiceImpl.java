@@ -17,31 +17,31 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     public Teacher insert(Teacher teacher) {
-        Teacher insert = this.teacherDao.insertTeacher(teacher);
+        Teacher insert = this.teacherDao.insert(teacher);
         return insert;
     }
 
     public Teacher update(Teacher teacher) {
-        Teacher update = this.teacherDao.updateTeacher(teacher);
+        Teacher update = this.teacherDao.update(teacher);
         return update;
     }
 
     public Teacher delete(Teacher teacher) {
-        Teacher delete = this.teacherDao.deleteTeacher(teacher);
+        Teacher delete = this.teacherDao.delete(teacher.getId(),teacher);
         return delete;
     }
 
     public Teacher search (Teacher teacher) {
-        Teacher found = this.teacherDao.searchTeacher(teacher);
+        Teacher found = this.teacherDao.search(teacher.getId());
         return found;
     }
 
     public List<Teacher> getAllTeacher() throws SQLException {
-        List<Teacher> teachers = this.teacherDao.getAllTeacher();
+        List<Teacher> teachers = this.teacherDao.getAll();
         return teachers;
     }
 
     public List<Teacher> searchTeacherByDepartment(int departmentId) throws SQLException {
-        return this.teacherDao.getTeacherByDepartment(departmentId);
+        return this.teacherDao.getObjectById(departmentId);
     }
 }

@@ -19,32 +19,32 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
     @Override
     public Employee search(Employee employee){
-        Employee search = this.employeeDao.searchEmployee(employee);
+        Employee search = this.employeeDao.search(employee.getId());
         return search;
     }
     @Override
     public Employee insert(Employee employee) {
-        Employee insert = this.employeeDao.insertEmployee(employee);
+        Employee insert = this.employeeDao.insert(employee);
         return insert;
     }
 
     @Override
     public Employee delete(Employee employee) {
-        Employee deleted = this.employeeDao.deleteEmployee(employee);
+        Employee deleted = this.employeeDao.delete(employee.getId(),employee);
         return deleted;
     }
 
     @Override
     public Employee update(Employee employee)  {
-        Employee update = this.employeeDao.employeeUpdate(employee);
+        Employee update = this.employeeDao.update(employee);
         return update;
     }
 
     public List<Employee> getAllEmployees() throws SQLException, IOException {
-        return this.employeeDao.getAllEmployees();
+        return this.employeeDao.getAll();
     }
 
     public List<Employee> searchEmployeeByDepartment(int typeId) throws SQLException, IOException {
-        return this.employeeDao.getEmployeesByDepartment(typeId);
+        return this.employeeDao.getObjectById(typeId);
     }
 }
