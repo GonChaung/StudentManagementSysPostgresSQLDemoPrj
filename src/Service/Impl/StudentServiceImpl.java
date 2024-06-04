@@ -3,13 +3,10 @@ package Service.Impl;
 import Dao.StudentDao;
 import Model.Student;
 import Service.StudentService;
-import Utils.DataUtil;
-import java.io.BufferedReader;
 import java.sql.*;
 import java.util.List;
 
 public class StudentServiceImpl implements StudentService {
-    BufferedReader br = DataUtil.br;
     private StudentDao studentDao;
     public StudentServiceImpl() {
      this.studentDao = new StudentDao();
@@ -38,5 +35,6 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> searchStudentByDepartment(int departmentId) throws SQLException {
         return this.studentDao.getObjectById(departmentId);
     }
+
 
 }

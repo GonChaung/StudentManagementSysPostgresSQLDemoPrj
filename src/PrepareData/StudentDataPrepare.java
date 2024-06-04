@@ -95,4 +95,9 @@ public class StudentDataPrepare extends PersonDataPrepare{
             }
         }
     }
+
+    public Student prepareStudentCourseRegister() {
+        Student student = new Student();
+        return student;
+    }
 }
