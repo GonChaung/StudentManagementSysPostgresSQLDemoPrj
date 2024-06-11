@@ -13,7 +13,7 @@ public class RegistrationApp {
         StudentController sc = new StudentController();
         TeacherController tc = new TeacherController();
         EmployeeController ec = new EmployeeController();
-        DepartmentController dc = new DepartmentController();
+        //DepartmentController dc = new DepartmentController();
         while(work.equals("yes")){
             System.out.println(" For student or teacher or employee or department ?");
             String choice = br.readLine();
@@ -23,8 +23,6 @@ public class RegistrationApp {
                 case "teacher" : tc.teacherRegister();
                 break;
                 case "employee" : ec.employeeRegister();
-                break;
-                case "department" : dc.department();
                 break;
             }
             System.out.println("Do you want to continue? (yes/no) ?");

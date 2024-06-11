@@ -1,12 +1,16 @@
 package Controller;
 
 import Model.Department;
+import Model.Major;
 import Model.Student;
 import PrepareData.StudentDataPrepare;
 import Service.Impl.StudentServiceImpl;
 import Utils.DataUtil;
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.IllegalFormatException;
 import java.util.List;
 
 public class StudentController {
@@ -26,6 +30,7 @@ public class StudentController {
         System.out.println("4. Get all student data");
         System.out.println("5. Update Student Data");
         System.out.println("6. Search Student by department");
+        System.out.println("7. Course Registration");
         System.out.println();
 
         int choice = Integer.parseInt(DataUtil.br.readLine());
@@ -71,8 +76,8 @@ public class StudentController {
                 List<Student> studentsByDepartment = this.studentService.searchStudentByDepartment(departmentId);
                 this.studentDataPrepare.displayStudentByDepartment(studentsByDepartment, departmentId);
                 break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + choice);
+            case 7:
+                this.studentDataPrepare.prepareStudentCourseRegister();
         }
     }
 }

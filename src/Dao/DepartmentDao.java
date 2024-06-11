@@ -1,14 +1,15 @@
 package Dao;
 
 import Model.*;
-import Utils.DatabaseUtil;
-import java.sql.PreparedStatement;
+import Utils.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DepartmentDao {
     Connection con = DatabaseUtil.getConnection();
+    PreparedStatement pstmt = null;
     public Department insertDepartment(Department department){
         String insertSQL = "INSERT INTO departments VALUES(?,?,?)";
         try(PreparedStatement pstmt = con.prepareStatement(insertSQL)){
@@ -68,4 +69,27 @@ public class DepartmentDao {
         }
         return persons;
     }
+    public List<Major> getMajorsByDepartment(int departmentId) {
+        List<Major> majors = new ArrayList<>();
+        String query = "SELECT * FROM majors WHERE department_id = ?";
+        try {
+            con = DatabaseUtil.getConnection();
+            pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, departmentId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Major major = new Major();
+                    major.setId(rs.getInt("id"));
+                    major.setName(rs.getString("name"));
+                    major.setDepartmentid(rs.getInt("department_id"));
+                    major.setCode(rs.getString("code"));
+                    majors.add(major);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return majors;
+    }
+
 }

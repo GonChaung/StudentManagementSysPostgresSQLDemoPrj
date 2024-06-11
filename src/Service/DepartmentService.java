@@ -13,8 +13,8 @@ public class DepartmentService {
         this.departmentDao = new DepartmentDao();
     }
 
-    public List<Person> getAllPerson() throws SQLException {
-        List<Person> persons = this.departmentDao.getAllPersonByDepartmentId();
-        return persons;
-    }
+//    public List<Person> getAllPerson() throws SQLException {
+//        List<Person> persons = this.departmentDao.getAllPersonByDepartmentId();
+//        return persons;
+//    }
 }

@@ -83,4 +83,5 @@ public class StudentDao extends GeneralDao<Student>{
     public String getSearchByIdQuery() {
         return "SELECT * FROM students WHERE department_id = ?";
     }
+
 }

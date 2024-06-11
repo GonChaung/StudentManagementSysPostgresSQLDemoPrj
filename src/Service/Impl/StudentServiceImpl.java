@@ -36,5 +36,8 @@ public class StudentServiceImpl implements StudentService {
         return this.studentDao.getObjectById(departmentId);
     }
 
+    public Student courseRegister(Student student) {
 
+        return student;
+    }
 }

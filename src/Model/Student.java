@@ -7,6 +7,12 @@ public class Student extends Person {
         super(id, name, age, gender, phone, email);
         this.department = department;
     }
+
+    public Student(int id) {
+        super(id);
+    }
+
+
     public Department getDepartment() {
         return this.department;
     }

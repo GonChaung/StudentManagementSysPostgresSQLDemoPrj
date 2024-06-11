@@ -1,8 +1,12 @@
 package PrepareData;
 
 import Dao.DepartmentDao;
+import Dao.GeneralDao;
 import Model.Department;
+import Model.Major;
 import Model.Student;
+import Service.Impl.StudentServiceImpl;
+import Service.StudentService;
 import Utils.DataUtil;
 
 import java.io.BufferedReader;
@@ -13,9 +17,11 @@ import java.util.List;
 public class StudentDataPrepare extends PersonDataPrepare{
     BufferedReader br = DataUtil.br;
     private DepartmentDao departmentDao;
+    private StudentService studentService;
 
     public StudentDataPrepare() {
         this.departmentDao=new DepartmentDao();
+        this.studentService = new StudentServiceImpl();
     }
 
     public Student prepareStudentForRegistration() throws IOException, SQLException {
@@ -96,8 +102,24 @@ public class StudentDataPrepare extends PersonDataPrepare{
         }
     }
 
-    public Student prepareStudentCourseRegister() {
-        Student student = new Student();
-        return student;
+    public void prepareStudentCourseRegister() throws IOException, SQLException {
+        System.out.println("Enter student ID:");
+        int studentId = Integer.parseInt(br.readLine());
+
+        Student student = (Student) studentService.search(new Student(studentId));
+        if (student == null) {
+            System.out.println("Invalid student ID. Please try again.");
+        }
+
+        Department department = student.getDepartment();
+        System.out.println("Student's department: " + department.getName());
+
+        List<Major> majors = departmentDao.getMajorsByDepartment(department.getId());
+        System.out.println("Available majors in the department:");
+        for (Major major : majors) {
+            System.out.println("ID: " + major.getId() + ", Name: " + major.getName());
+        }
+
+        List<Course>
     }
 }
