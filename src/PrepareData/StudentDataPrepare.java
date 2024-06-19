@@ -1,7 +1,9 @@
 package PrepareData;
 
 import Dao.DepartmentDao;
-import Dao.GeneralDao;
+import Dao.MajorDao;
+import Dao.StudentCoursesDao;
+import Model.Course;
 import Model.Department;
 import Model.Major;
 import Model.Student;
@@ -18,10 +20,16 @@ public class StudentDataPrepare extends PersonDataPrepare{
     BufferedReader br = DataUtil.br;
     private DepartmentDao departmentDao;
     private StudentService studentService;
+    private MajorDao majorDao;
+    private CourseDataPrepare courseDataPrepare;
+    StudentCoursesDao studentCoursesDao;
 
     public StudentDataPrepare() {
         this.departmentDao=new DepartmentDao();
         this.studentService = new StudentServiceImpl();
+        this.majorDao=new MajorDao();
+        this.courseDataPrepare = new CourseDataPrepare();
+        this.studentCoursesDao=new StudentCoursesDao();
     }
 
     public Student prepareStudentForRegistration() throws IOException, SQLException {
@@ -92,7 +100,7 @@ public class StudentDataPrepare extends PersonDataPrepare{
     }
 
     public void displayStudentByDepartment(List<Student> students, int id) {
-        if( students.isEmpty()){
+        if(students.isEmpty()){
             System.out.println("There is no student with ID " + id);
         }else{
             System.out.println("Student for Department ID " + id + ":");
@@ -105,21 +113,27 @@ public class StudentDataPrepare extends PersonDataPrepare{
     public void prepareStudentCourseRegister() throws IOException, SQLException {
         System.out.println("Enter student ID:");
         int studentId = Integer.parseInt(br.readLine());
-
         Student student = (Student) studentService.search(new Student(studentId));
         if (student == null) {
             System.out.println("Invalid student ID. Please try again.");
         }
-
         Department department = student.getDepartment();
         System.out.println("Student's department: " + department.getName());
-
         List<Major> majors = departmentDao.getMajorsByDepartment(department.getId());
         System.out.println("Available majors in the department:");
         for (Major major : majors) {
             System.out.println("ID: " + major.getId() + ", Name: " + major.getName());
         }
-
-        List<Course>
+        System.out.println("What major do you want to register?");
+        int major = Integer.parseInt(br.readLine());
+        List<Course> courses = majorDao.getCoursesByMajor(major);
+        System.out.println("Available courses in the major: ");
+        for (Course course : courses) {
+            System.out.println("ID: " + course.getId() + ", Name: " + course.getName());
+        }
+        List<String> coursesDataPrepare = courseDataPrepare.courseDataPrepare();
+        List<Integer> courseIds = coursesDataPrepare.stream().map(Integer::parseInt).toList();
+        studentCoursesDao.addStudentCourses(studentId, courseIds);
+        System.out.println("Student course registration successful.");
     }
 }
